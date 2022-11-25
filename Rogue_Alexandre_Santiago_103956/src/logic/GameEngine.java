@@ -2,11 +2,15 @@ package logic;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import characters.Hero;
 import pt.iscte.poo.gui.ImageMatrixGUI;
 import pt.iscte.poo.observer.Observed;
 import pt.iscte.poo.observer.Observer;
+import pt.iscte.poo.utils.Point2D;
 import structures.Room;
 
 public class GameEngine implements Observer {
@@ -17,7 +21,8 @@ public class GameEngine implements Observer {
 	private static GameEngine INSTANCE = null;
 	private ImageMatrixGUI gui = ImageMatrixGUI.getInstance();
 
-	private List<Room> rooms = new ArrayList<>();
+	private Hero hero = new Hero(new Point2D(1, 1));
+	private Map<String, Room> rooms = new HashMap<>();
 	private Room currentRoom;
 
 	private int turns;
@@ -51,22 +56,19 @@ public class GameEngine implements Observer {
 	}
 
 	public void setCurrentRoom(String roomName) {
-		for (Room room : rooms) {
-			if (roomName.equals(room.toString())) {
-				currentRoom = room;
-				currentRoom.load();
-			}
-		}
+		currentRoom = rooms.get(roomName);
 	}
 
 	public void start() { // init only once
 
-//		rooms.add(FileReader.createRoom("room0"));// Load every room?
-//		rooms.add(FileReader.createRoom("room1"));// Load every room?
-//		rooms.add(FileReader.createRoom("room2"));// Load every room?
-//		rooms.add(FileReader.createRoom("room3"));// Load every room?
-		rooms.add(FileReader.createRoom("testRoom"));// Load every room?
-		currentRoom = rooms.get(0); // starting room
+		rooms.put("testRoom", FileReader.createRoom("testRoom"));
+		rooms.put("room0", FileReader.createRoom("room0"));
+		rooms.put("room1", FileReader.createRoom("room1"));
+	//	rooms.put("room2", FileReader.createRoom("room2"));
+	//	rooms.put("room3", FileReader.createRoom("room3"));
+		
+		setCurrentRoom("testRoom");
+		currentRoom.addGameElement(hero);
 		currentRoom.load();
 		
 		gui.setStatusMessage("Good luck!");
@@ -77,19 +79,20 @@ public class GameEngine implements Observer {
 	public void update(Observed source) {
 		int keyPressed = ((ImageMatrixGUI) source).keyPressed();
 		if (keyPressed >= KeyEvent.VK_LEFT && keyPressed <= KeyEvent.VK_DOWN) {
-			Movement.keyPress(keyPressed); // moves Hero when arrow key is pressed
+			//Movement.keyPress(keyPressed); // moves Hero when arrow key is pressed
+			hero.setKeyPressed(keyPressed);
 		}
-		switch (keyPressed) {
-		case KeyEvent.VK_1:
-			currentRoom.getHero().drop(0);
-			break;
-		case KeyEvent.VK_2:
-			currentRoom.getHero().drop(1);
-			break;
-		case KeyEvent.VK_3:
-			currentRoom.getHero().drop(2);
-			break;
-		}
+//		switch (keyPressed) {
+//		case KeyEvent.VK_1:
+//			currentRoom.getHero().drop(0);
+//			break;
+//		case KeyEvent.VK_2:
+//			currentRoom.getHero().drop(1);
+//			break;
+//		case KeyEvent.VK_3:
+//			currentRoom.getHero().drop(2);
+//			break;
+//		}
 
 		currentRoom.moveEnemies();// only current room?
 		turns++;

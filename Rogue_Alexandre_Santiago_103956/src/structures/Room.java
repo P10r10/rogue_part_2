@@ -6,16 +6,18 @@ import java.util.List;
 import characters.Hero;
 import interfaces.Movable;
 import interfaces.Pickable;
+import logic.AliveGameElement;
 import logic.GameElement;
 import logic.GameEngine;
 import pt.iscte.poo.gui.ImageTile;
 import pt.iscte.poo.utils.Point2D;
+import pt.iscte.poo.utils.Vector2D;
 
 public class Room {
 
 	private String name;
 	private List<GameElement> elements;
-	private Hero hero = Hero.getInstance();// added review
+	//private Hero hero = Hero.getInstance();// added review
 
 	public Room(String name, List<GameElement> elements) {
 		this.name = name;
@@ -27,30 +29,45 @@ public class Room {
 		for (ImageTile image : elements) {
 			GameEngine.getInstance().getGui().addImage(image);
 		}
-		GameEngine.getInstance().getGui().addImage(hero);
-		GameEngine.getInstance().getGui().addImages(hero.getHpBar().getComponents());
-		System.out.println("BREAK!");
-		elements.forEach(e -> System.out.println(e));
+	//	GameEngine.getInstance().getGui().addImage(hero);
+	//	GameEngine.getInstance().getGui().addImages(hero.getHpBar().getComponents());
 	}
 	
-	/*remove*/
+	/*remove?*/
 	public List<GameElement> getElements() {
 		return elements;
 	}
-	/*remove*/
+	/*remove?*/
 
-	public Hero getHero() {
-		return hero;
+	private Point2D heroPosition() {
+		for (GameElement gameElement : elements) {
+			if (gameElement instanceof Hero)
+				return gameElement.getPosition();
+		}
+		return null;
 	}
+	
+	public Point2D wayToHero(AliveGameElement elem) {
+		Vector2D directionToHero = elem.getPosition().directionTo(heroPosition()).asVector();
+		Point2D destination = elem.getPosition().plus(directionToHero);
+		return destination;
+	}
+//	public Hero getHero() {
+//		return hero;
+//	}
 
-	public void removeGameElement(ImageTile gameElement) {
+	public void removeGameElement(GameElement gameElement) {
 		elements.remove(gameElement);
+	}
+	
+	public void addGameElement(GameElement gameElement) {
+		elements.add(gameElement);
 	}
 
 	public void moveEnemies() {
-		for (ImageTile gameElement : elements) {
-			if (gameElement instanceof Movable)
-				((Movable) gameElement).move();
+		for (GameElement gameElement : elements) {
+			if (gameElement instanceof AliveGameElement)
+				((AliveGameElement) gameElement).move();
 		}
 	}
 

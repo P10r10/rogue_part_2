@@ -1,6 +1,7 @@
 package characters;
 import logic.AliveGameElement;
-import logic.Movement;
+import logic.GameEngine;
+import pt.iscte.poo.utils.Direction;
 import pt.iscte.poo.utils.Point2D;
 
 public class Bat extends AliveGameElement {
@@ -9,24 +10,6 @@ public Bat(Point2D position) {
 		super(position, 3);
 	}
 
-//	public Bat(Point2D position, 3) {
-//		super(position);
-//	}
-	
-//	@Override
-//	public boolean isDead(int damage) {
-//		hp = hp - damage;
-//		if (hp <= 0) {
-//			return true;
-//		}
-//		return false;
-//	}
-	
-//	@Override
-//	public int getHp() {
-//		return hp;
-//	}
-//	
 	public void heal() {
 		if (getHp() < 3) {
 			setHp(getHp() + 1);;
@@ -44,6 +27,12 @@ public Bat(Point2D position) {
 
 	@Override
 	public void move() {
-		Movement.move(this);
+		Point2D randomDestination = getPosition().plus(Direction.random().asVector());
+		
+		if (GameEngine.getInstance().getTurns() % 2 == 0) {
+			setPosition(GameEngine.getInstance().getGurrentRoom().wayToHero(this)); // colision
+		} else {
+			setPosition(randomDestination); // colision
+		}
 	}
 }

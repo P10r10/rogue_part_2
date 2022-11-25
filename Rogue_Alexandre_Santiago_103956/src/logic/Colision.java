@@ -17,14 +17,14 @@ public class Colision {
 			Living living = (Living) gameElement;
 			int heroDamage = 1; // + sword multiplier
 			if (living.isDead(heroDamage)) { // if takes deadly damage remove from room
-				GameEngine.getInstance().getGurrentRoom().removeGameElement(gameElement);
+			//	GameEngine.getInstance().getGurrentRoom().removeGameElement(gameElement);
 			}
 			//System.out.println(gameElement.getName() + " has " + living.getHp() + " hp left");
 		}
 	}
 
 	public static void withHero(GameElement gameElement) {
-		Hero hero = GameEngine.getInstance().getGurrentRoom().getHero();
+	//	Hero hero = GameEngine.getInstance().getGurrentRoom().getHero();
 		int damage = 0;
 		if (gameElement instanceof Bat) { // Bat damage
 			damage = new Random().nextInt(2); // either 0 or 1
@@ -40,12 +40,11 @@ public class Colision {
 		if (gameElement instanceof Skeleton) { // Skeleton damage
 			damage = 1;
 		}
-		if (hero.isDead(damage)) { // if hero takes deadly damage game is over
-			//GameEngine.getInstance().getGurrentRoom().removeGameElement(hero);
-			GameEngine.getInstance().getGui().setMessage("YOU ARE DEAD!!! GAME OVER");
-			GameEngine.getInstance().getGui().dispose();
-			System.exit(0);
-		}
+//		if (hero.isDead(damage)) { // if hero takes deadly damage game is over
+//			GameEngine.getInstance().getGui().setMessage("YOU ARE DEAD!!! GAME OVER");
+//			GameEngine.getInstance().getGui().dispose();
+//			System.exit(0);
+//		}
 		//System.out.println("Hero has " + hero.getHp() + " hp left");
 	}
 }

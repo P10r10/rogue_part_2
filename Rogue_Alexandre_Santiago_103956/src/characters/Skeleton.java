@@ -45,6 +45,6 @@ public class Skeleton extends GameElement implements Movable, Living {
 
 	@Override
 	public void move() {
-		Movement.move(this);
+		//Movement.move(this);
 	}
 }
