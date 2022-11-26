@@ -12,11 +12,11 @@ import structures.Wall;
 public class Hero extends AliveGameElement {
 	
 	private final HpBar hpBar = new HpBar(10);
-	
 	private int keyPressed;
+	private boolean isPoisoned = false;
 
 	public Hero(Point2D position, String room) {
-		super(position, room, 10);
+		super(position, room, 100); // initial hp = 10
 	}
 
 	public void drop(int slot) {
@@ -40,6 +40,14 @@ public class Hero extends AliveGameElement {
 
 	public HpBar getHpBar() {
 		return hpBar;
+	}
+
+	public boolean isPoisoned() {
+		return isPoisoned;
+	}
+
+	public void setPoisoned() {
+		isPoisoned = true;
 	}
 
 	public void setKeyPressed(int keyPressed) {
@@ -70,7 +78,7 @@ public class Hero extends AliveGameElement {
 	public void move() {
 		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
 		Point2D destination = getPosition().plus(Direction.directionFor(keyPressed).asVector());
-		if (!(thisRoom.elementAt(destination) instanceof Wall)) {
+		if (!(thisRoom.elementAt(destination) instanceof Wall)) { // can't cross walls
 			if (thisRoom.elementAt(destination) instanceof AliveGameElement) { // attacks
 				AliveGameElement elem = ((AliveGameElement) thisRoom.elementAt(destination));
 				elem.takesDamage(1);//TODO with sword

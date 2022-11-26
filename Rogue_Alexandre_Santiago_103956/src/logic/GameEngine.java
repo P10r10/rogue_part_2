@@ -19,7 +19,7 @@ public class GameEngine implements Observer {
 	private static GameEngine INSTANCE = null;
 	private ImageMatrixGUI gui = ImageMatrixGUI.getInstance();
 
-	private Hero hero = new Hero(new Point2D(1, 1), "testRoom");
+	private Hero hero = new Hero(new Point2D(1, 1), "room0");
 	private Map<String, Room> rooms = new HashMap<>();
 	//private Room currentRoom;
 
@@ -60,16 +60,17 @@ public class GameEngine implements Observer {
 	public void start() { // init only once
 
 		rooms.put("testRoom", FileReader.createRoom("testRoom"));//change in Hero too!
-//		rooms.put("room0", FileReader.createRoom("room0"));
-//		rooms.put("room1", FileReader.createRoom("room1"));
-	//	rooms.put("room2", FileReader.createRoom("room2"));
-	//	rooms.put("room3", FileReader.createRoom("room3"));
+		rooms.put("testRoom2", FileReader.createRoom("testRoom2"));//change in Hero too!
+		rooms.put("room0", FileReader.createRoom("room0"));
+		rooms.put("room1", FileReader.createRoom("room1"));
+		rooms.put("room2", FileReader.createRoom("room2"));
+		rooms.put("room3", FileReader.createRoom("room3"));
 		
 //		setCurrentRoom("testRoom");
 //		currentRoom.addGameElement(hero);
 //		currentRoom.load();
-		rooms.get("testRoom").addGameElement(hero);
-		rooms.get("testRoom").load();
+		rooms.get("room0").addGameElement(hero);
+		rooms.get("room0").load();
 		
 		gui.setStatusMessage("Good luck!");
 		gui.update();
@@ -80,7 +81,9 @@ public class GameEngine implements Observer {
 		int keyPressed = ((ImageMatrixGUI) source).keyPressed();
 		if (keyPressed >= KeyEvent.VK_LEFT && keyPressed <= KeyEvent.VK_DOWN) {
 			hero.setKeyPressed(keyPressed);
-			//currentRoom.moveEnemies();// only current room?
+			if (hero.isPoisoned()) {
+				hero.takesDamage(1);
+			}
 			turns++;
 			gui.setStatusMessage("Turn: " + turns);
 			gui.update();

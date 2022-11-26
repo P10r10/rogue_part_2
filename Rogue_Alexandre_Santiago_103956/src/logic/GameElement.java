@@ -1,31 +1,35 @@
 package logic;
 
 import characters.Bat;
+import characters.Scorpio;
 import characters.Skeleton;
+import characters.Thief;
 import characters.Thug;
 import items.Armor;
 import items.HealingPotion;
+import items.Key;
 import items.Sword;
 import items.Treasure;
 import pt.iscte.poo.gui.ImageTile;
 import pt.iscte.poo.utils.Point2D;
+import structures.Door;
 
 public abstract class GameElement implements ImageTile {
 
 	private Point2D position;
 	private String thisRoom;
 	private int layer = 0;
-	
+
 	public GameElement(Point2D position, String room) {
 		this.position = position;
 		thisRoom = room;
 	}
-	
+
 	@Override
 	public Point2D getPosition() {
 		return position;
 	}
-	
+
 	public String thisRoom() {
 		return thisRoom;
 	}
@@ -33,7 +37,7 @@ public abstract class GameElement implements ImageTile {
 	public void setPosition(Point2D position) {
 		this.position = position;
 	}
-	
+
 	@Override
 	public int getLayer() {
 		return layer;
@@ -53,6 +57,10 @@ public abstract class GameElement implements ImageTile {
 			return new Skeleton(position, room);
 		case "Thug":
 			return new Thug(position, room);
+		case "Thief":
+			return new Thief(position, room);
+		case "Scorpio":
+			return new Scorpio(position, room);
 		case "Sword":
 			return new Sword(position, room);
 		case "HealingPotion":
@@ -60,17 +68,15 @@ public abstract class GameElement implements ImageTile {
 		case "Treasure":
 			return new Treasure(position, room);
 		case "Armor":
-			return new Armor(position, room);//HERE
-//		case "Key":
-//			return new Key(position, args[3]);
-//		case "Door":
-//			if (args.length == 7) { //has Key_ID
-//				return new Door(position, args[3], Integer.parseInt(args[4]),
-//						Integer.parseInt(args[5]), args[6]);
-//			} else { //has no Key_ID and thus the door is open
-//				return new Door(position, args[3], Integer.parseInt(args[4]),
-//						Integer.parseInt(args[5]), null);
-//			}
+			return new Armor(position, room);
+		case "Key":
+			return new Key(position, room, args[3]);
+		case "Door":
+			if (args.length == 7) { // has Key_ID
+				return new Door(position, room, args[3], Integer.parseInt(args[4]), Integer.parseInt(args[5]), args[6]);
+			} else { // has no Key_ID correspond to open door
+				return new Door(position, room, args[3], Integer.parseInt(args[4]), Integer.parseInt(args[5]), null);
+			}
 		default:
 			throw new IllegalArgumentException(name + " does not exist!");
 		}

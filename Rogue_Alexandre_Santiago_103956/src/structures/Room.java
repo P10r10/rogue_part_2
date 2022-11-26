@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import characters.Hero;
-import interfaces.Movable;
 import interfaces.Pickable;
 import logic.AliveGameElement;
 import logic.GameElement;
@@ -38,7 +37,7 @@ public class Room {
 	}
 	/*remove?*/
 	
-	private Point2D heroPosition() {
+	private Point2D heroPosition() { // stays??
 		for (ImageTile gameElement : elements) {
 			if (gameElement instanceof Hero)
 				return gameElement.getPosition();
