@@ -5,8 +5,8 @@ import pt.iscte.poo.utils.Point2D;
 
 public class Floor extends GameElement {
 
-	public Floor(Point2D position) {
-		super(position);
+	public Floor(Point2D position, String room) {
+		super(position, room);
 	}
 
 	@Override

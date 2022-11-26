@@ -8,8 +8,8 @@ public class Sword extends GameElement implements Pickable {
 
 	private int layer = 2;
 
-	public Sword(Point2D position) {
-		super(position);
+	public Sword(Point2D position, String room) {
+		super(position, room);
 	}
 
 	@Override

@@ -8,8 +8,8 @@ public class Armor extends GameElement implements Pickable {
 
 	private int layer = 2;
 
-	public Armor(Point2D position) {
-		super(position);
+	public Armor(Point2D position, String room) {
+		super(position, room);
 	}
 
 	@Override

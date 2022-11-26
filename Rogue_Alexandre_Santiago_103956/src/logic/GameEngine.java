@@ -1,9 +1,7 @@
 package logic;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import characters.Hero;
@@ -21,9 +19,9 @@ public class GameEngine implements Observer {
 	private static GameEngine INSTANCE = null;
 	private ImageMatrixGUI gui = ImageMatrixGUI.getInstance();
 
-	private Hero hero = new Hero(new Point2D(1, 1));
+	private Hero hero = new Hero(new Point2D(1, 1), "testRoom");
 	private Map<String, Room> rooms = new HashMap<>();
-	private Room currentRoom;
+	//private Room currentRoom;
 
 	private int turns;
 
@@ -51,25 +49,27 @@ public class GameEngine implements Observer {
 		gui.go();
 	}
 
-	public Room getGurrentRoom() {
-		return currentRoom;
+	public Room getRoom(String room) {
+		return rooms.get(room);
 	}
 
-	public void setCurrentRoom(String roomName) {
-		currentRoom = rooms.get(roomName);
-	}
+//	public void setCurrentRoom(String roomName) {
+//		currentRoom = rooms.get(roomName);
+//	}
 
 	public void start() { // init only once
 
-		rooms.put("testRoom", FileReader.createRoom("testRoom"));
-		rooms.put("room0", FileReader.createRoom("room0"));
-		rooms.put("room1", FileReader.createRoom("room1"));
+		rooms.put("testRoom", FileReader.createRoom("testRoom"));//change in Hero too!
+//		rooms.put("room0", FileReader.createRoom("room0"));
+//		rooms.put("room1", FileReader.createRoom("room1"));
 	//	rooms.put("room2", FileReader.createRoom("room2"));
 	//	rooms.put("room3", FileReader.createRoom("room3"));
 		
-		setCurrentRoom("testRoom");
-		currentRoom.addGameElement(hero);
-		currentRoom.load();
+//		setCurrentRoom("testRoom");
+//		currentRoom.addGameElement(hero);
+//		currentRoom.load();
+		rooms.get("testRoom").addGameElement(hero);
+		rooms.get("testRoom").load();
 		
 		gui.setStatusMessage("Good luck!");
 		gui.update();
@@ -79,8 +79,11 @@ public class GameEngine implements Observer {
 	public void update(Observed source) {
 		int keyPressed = ((ImageMatrixGUI) source).keyPressed();
 		if (keyPressed >= KeyEvent.VK_LEFT && keyPressed <= KeyEvent.VK_DOWN) {
-			//Movement.keyPress(keyPressed); // moves Hero when arrow key is pressed
 			hero.setKeyPressed(keyPressed);
+			//currentRoom.moveEnemies();// only current room?
+			turns++;
+			gui.setStatusMessage("Turn: " + turns);
+			gui.update();
 		}
 //		switch (keyPressed) {
 //		case KeyEvent.VK_1:
@@ -94,9 +97,5 @@ public class GameEngine implements Observer {
 //			break;
 //		}
 
-		currentRoom.moveEnemies();// only current room?
-		turns++;
-		gui.setStatusMessage("Turn: " + turns);
-		gui.update();
 	}
 }

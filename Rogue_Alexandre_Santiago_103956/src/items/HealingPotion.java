@@ -8,8 +8,8 @@ public class HealingPotion extends GameElement implements Pickable {
 
 	private int layer = 2;
 
-	public HealingPotion(Point2D position) {
-		super(position);
+	public HealingPotion(Point2D position, String room) {
+		super(position, room);
 	}
 
 	@Override

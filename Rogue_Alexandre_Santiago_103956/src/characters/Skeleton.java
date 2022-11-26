@@ -1,50 +1,42 @@
 package characters;
 
-import interfaces.Living;
-import interfaces.Movable;
-import logic.GameElement;
-import logic.Movement;
+import logic.AliveGameElement;
+import logic.GameEngine;
 import pt.iscte.poo.utils.Point2D;
+import structures.Door;
+import structures.Room;
+import structures.Wall;
 
-public class Skeleton extends GameElement implements Movable, Living {
+public class Skeleton extends AliveGameElement {
 
-	private int hp = 5; // initial hp
-	private int layer = 1;
-
-	public Skeleton(Point2D position) {
-		super(position);
-	}
-
-	@Override
-	public boolean isDead(int damage) {
-		hp = hp - damage;
-		if (hp <= 0) {
-			return true;
-		}
-		return false;
-	}
-	
-	@Override
-	public int getHp() {
-		return hp;
+	public Skeleton(Point2D position, String room) {
+		super(position, room, 5); // initial hp = 5
 	}
 
 	@Override
 	public String getName() {
-		if (hp <= 0) {
-			layer = 0;
+		if (getHp() <= 0) {
+			setLayer(0);
 			return "DeadSkeleton";
 		}
 		return "Skeleton";
 	}
 
 	@Override
-	public int getLayer() {
-		return layer;
-	}
-
-	@Override
 	public void move() {
-		//Movement.move(this);
+		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
+		Point2D destination = thisRoom.wayToHero(this);
+
+		if (GameEngine.getInstance().getTurns() % 2 == 1) {
+			return; // towards Hero only 50% of turns
+		} 
+		if (thisRoom.elementAt(destination) instanceof Wall || thisRoom.elementAt(destination) instanceof Door) {
+			return; // can't cross walls or doors
+		}
+		if (thisRoom.elementAt(destination) instanceof Hero) { // attacks hero
+			((Hero) thisRoom.elementAt(destination)).takesDamage(1);
+		} else { // can move freely
+			setPosition(destination);
+		}
 	}
 }

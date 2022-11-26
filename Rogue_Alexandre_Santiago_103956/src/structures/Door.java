@@ -11,8 +11,8 @@ public class Door extends GameElement {
 	private boolean isOpen = false;
 	private String key_id;
 
-	public Door(Point2D position, String destination, int x_dest, int y_dest, String key_id) {
-		super(position);
+	public Door(Point2D position, String room, String destination, int x_dest, int y_dest, String key_id) {
+		super(position, room);
 		this.destination = destination;
 		this.x_dest = x_dest;
 		this.y_dest = y_dest;

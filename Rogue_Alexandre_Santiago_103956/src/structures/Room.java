@@ -16,31 +16,30 @@ import pt.iscte.poo.utils.Vector2D;
 public class Room {
 
 	private String name;
-	private List<GameElement> elements;
-	//private Hero hero = Hero.getInstance();// added review
+	private List<ImageTile> elements;
 
-	public Room(String name, List<GameElement> elements) {
+	public Room(String name, List<ImageTile> elements) {
 		this.name = name;
 		this.elements = elements;
 	}
 	
 	public void load() {
 		GameEngine.getInstance().getGui().clearImages();
-		for (ImageTile image : elements) {
-			GameEngine.getInstance().getGui().addImage(image);
+		GameEngine.getInstance().getGui().addImages(elements);
+		GameEngine.getInstance().getGui().addImages(getHero().getHpBar().getComponents());
+	}
+	/*remove?*/
+	private Hero getHero() {
+		for (ImageTile gameElement : elements) {
+			if (gameElement instanceof Hero)
+				return (Hero) gameElement;
 		}
-	//	GameEngine.getInstance().getGui().addImage(hero);
-	//	GameEngine.getInstance().getGui().addImages(hero.getHpBar().getComponents());
+		return null;
 	}
+	/*remove?*/
 	
-	/*remove?*/
-	public List<GameElement> getElements() {
-		return elements;
-	}
-	/*remove?*/
-
 	private Point2D heroPosition() {
-		for (GameElement gameElement : elements) {
+		for (ImageTile gameElement : elements) {
 			if (gameElement instanceof Hero)
 				return gameElement.getPosition();
 		}
@@ -65,42 +64,42 @@ public class Room {
 	}
 
 	public void moveEnemies() {
-		for (GameElement gameElement : elements) {
-			if (gameElement instanceof AliveGameElement)
-				((AliveGameElement) gameElement).move();
+		for (ImageTile elem : elements) {
+			if (elem instanceof AliveGameElement && !(elem instanceof Hero))
+				((AliveGameElement) elem).move();
 		}
 	}
 
-	public GameElement elementAt(Point2D position) {
-		List<GameElement> elementsAt = new ArrayList<>();
+	public ImageTile elementAt(Point2D position) {
+		List<ImageTile> elementsAt = new ArrayList<>();
 		// gathers elements in the same position
-		for (GameElement element : elements) {
+		for (ImageTile element : elements) {
 			if (position.equals(element.getPosition())) {
 				elementsAt.add(element);
 			}
 		}
 		// if 2 elements are in the same Point2D, assigns priority
-		for (GameElement elementAt : elementsAt) {
-			if (elementAt instanceof Movable) {
+		for (ImageTile elementAt : elementsAt) {
+			if (elementAt instanceof AliveGameElement) {
 				return elementAt;
 			}
 		}
-		for (GameElement elementAt : elementsAt) {
+		for (ImageTile elementAt : elementsAt) {
 			if (elementAt instanceof Pickable) {
 				return elementAt;
 			}
 		}
-		for (GameElement elementAt : elementsAt) {
+		for (ImageTile elementAt : elementsAt) {
 			if (elementAt instanceof Door) {
 				return elementAt;
 			}
 		}
-		for (GameElement elementAt : elementsAt) {
+		for (ImageTile elementAt : elementsAt) {
 			if (elementAt instanceof Wall) {
 				return elementAt;
 			}
 		}
-		for (GameElement elementAt : elementsAt) {
+		for (ImageTile elementAt : elementsAt) {
 			if (elementAt instanceof Floor) {
 				return elementAt;
 			}

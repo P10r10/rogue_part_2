@@ -13,8 +13,8 @@ public class Key extends GameElement implements Pickable {
 		return id;
 	}
 
-	public Key(Point2D position, String id) {
-		super(position);
+	public Key(Point2D position, String room, String id) {
+		super(position, room);
 		this.id = id;
 	}
 
