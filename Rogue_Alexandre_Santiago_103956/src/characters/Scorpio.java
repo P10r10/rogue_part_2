@@ -11,7 +11,7 @@ public class Scorpio extends AliveGameElement {
 	
 	public Scorpio(Point2D position, String room) {
 		super(position, room, 2); // initial hp = 2
-		setLayer(1);
+		setLayer(5);
 	}
 
 	@Override

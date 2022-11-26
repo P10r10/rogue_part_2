@@ -1,9 +1,11 @@
 package characters;
 
+import interfaces.Pickable;
 import logic.AliveGameElement;
 import logic.GameElement;
 import logic.GameEngine;
-import logic.HpBar;
+import logic.HpAndItemBar;
+import pt.iscte.poo.gui.ImageTile;
 import pt.iscte.poo.utils.Direction;
 import pt.iscte.poo.utils.Point2D;
 import structures.Room;
@@ -11,15 +13,18 @@ import structures.Wall;
 
 public class Hero extends AliveGameElement {
 	
-	private final HpBar hpBar = new HpBar(10);
+	private final HpAndItemBar hpBar = new HpAndItemBar(10);
 	private int keyPressed;
 	private boolean isPoisoned = false;
 
 	public Hero(Point2D position, String room) {
 		super(position, room, 100); // initial hp = 10
+		setLayer(9);
 	}
 
 	public void drop(int slot) {
+	//	Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
+		
 //		Room currentRoom = GameEngine.getInstance().getGurrentRoom();
 //		GameElement item = currentRoom.elementAt(new Point2D(7 + slot, 10));
 //		if (item != null && !(currentRoom.elementAt(getPosition()) instanceof Pickable)) {
@@ -27,7 +32,13 @@ public class Hero extends AliveGameElement {
 //		}
 	}
 
-	public void pick(GameElement item) {
+	public void pick(ImageTile item) {
+		
+		((Pickable) item).isPicked(true);
+		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
+		thisRoom.removeGameElement(item);
+		//TODO HERE item add BAR
+		
 //		Room currentRoom = GameEngine.getInstance().getGurrentRoom();
 //		for (int i = 0; i < 3; i++) {
 //			GameElement itemInSlot = currentRoom.elementAt(new Point2D(7 + i, 10));
@@ -38,7 +49,7 @@ public class Hero extends AliveGameElement {
 //		}
 	}
 
-	public HpBar getHpBar() {
+	public HpAndItemBar getHpBar() {
 		return hpBar;
 	}
 
@@ -78,6 +89,7 @@ public class Hero extends AliveGameElement {
 	public void move() {
 		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
 		Point2D destination = getPosition().plus(Direction.directionFor(keyPressed).asVector());
+		System.out.println(thisRoom.elementAt(destination));//REMOVE
 		if (!(thisRoom.elementAt(destination) instanceof Wall)) { // can't cross walls
 			if (thisRoom.elementAt(destination) instanceof AliveGameElement) { // attacks
 				AliveGameElement elem = ((AliveGameElement) thisRoom.elementAt(destination));
@@ -86,6 +98,11 @@ public class Hero extends AliveGameElement {
 					thisRoom.removeGameElement(elem);
 				}
 			} else {
+				if (thisRoom.elementAt(destination) instanceof Pickable) {
+					//TODO PICK
+					System.out.println("Pick!");
+					pick(thisRoom.elementAt(destination));
+				}
 				setPosition(destination);
 			}
 		}

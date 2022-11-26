@@ -50,11 +50,8 @@ public class Room {
 		Point2D destination = elem.getPosition().plus(directionToHero);
 		return destination;
 	}
-//	public Hero getHero() {
-//		return hero;
-//	}
 
-	public void removeGameElement(GameElement gameElement) {
+	public void removeGameElement(ImageTile gameElement) {
 		elements.remove(gameElement);
 	}
 	
@@ -70,36 +67,36 @@ public class Room {
 	}
 
 	public ImageTile elementAt(Point2D position) {
-		List<ImageTile> elementsAt = new ArrayList<>();
+//		List<ImageTile> elementsAt = new ArrayList<>();
 		// gathers elements in the same position
-		for (ImageTile element : elements) {
-			if (position.equals(element.getPosition())) {
-				elementsAt.add(element);
-			}
-		}
+//		for (ImageTile element : elements) {
+//			if (position.equals(element.getPosition())) {
+//				elementsAt.add(element);
+//			}
+//		}
 		// if 2 elements are in the same Point2D, assigns priority
-		for (ImageTile elementAt : elementsAt) {
-			if (elementAt instanceof AliveGameElement) {
+		for (ImageTile elementAt : elements) {
+			if (elementAt instanceof AliveGameElement && position.equals(elementAt.getPosition())) {
 				return elementAt;
 			}
 		}
-		for (ImageTile elementAt : elementsAt) {
-			if (elementAt instanceof Pickable) {
+		for (ImageTile elementAt : elements) {
+			if (elementAt instanceof Pickable && position.equals(elementAt.getPosition())) {
 				return elementAt;
 			}
 		}
-		for (ImageTile elementAt : elementsAt) {
-			if (elementAt instanceof Door) {
+		for (ImageTile elementAt : elements) {
+			if (elementAt instanceof Door && position.equals(elementAt.getPosition())) {
 				return elementAt;
 			}
 		}
-		for (ImageTile elementAt : elementsAt) {
-			if (elementAt instanceof Wall) {
+		for (ImageTile elementAt : elements) {
+			if (elementAt instanceof Wall && position.equals(elementAt.getPosition())) {
 				return elementAt;
 			}
 		}
-		for (ImageTile elementAt : elementsAt) {
-			if (elementAt instanceof Floor) {
+		for (ImageTile elementAt : elements) {
+			if (elementAt instanceof Floor && position.equals(elementAt.getPosition())) {
 				return elementAt;
 			}
 		}

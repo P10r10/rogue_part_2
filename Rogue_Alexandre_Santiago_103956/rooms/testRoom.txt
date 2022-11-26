@@ -9,10 +9,9 @@
 #        #
 ##########
 
-Thug,5,5
-Thug,5,6
-Thug,5,7
-Thug,5,8
-Thug,4,8
-Thug,4,7
-Thug,4,6
+Sword,5,5
+Sword,6,6
+Sword,7,7
+Bat,8,8
+Bat,8,7
+Bat,8,6

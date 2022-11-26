@@ -19,7 +19,7 @@ public class GameEngine implements Observer {
 	private static GameEngine INSTANCE = null;
 	private ImageMatrixGUI gui = ImageMatrixGUI.getInstance();
 
-	private Hero hero = new Hero(new Point2D(1, 1), "room0");
+	private Hero hero = new Hero(new Point2D(1, 1), "testRoom");
 	private Map<String, Room> rooms = new HashMap<>();
 	//private Room currentRoom;
 
@@ -37,10 +37,6 @@ public class GameEngine implements Observer {
 
 	public int getTurns() {
 		return turns;
-	}
-
-	public void setTurns(int turns) {
-		this.turns = turns;
 	}
 
 	private GameEngine() {
@@ -69,8 +65,8 @@ public class GameEngine implements Observer {
 //		setCurrentRoom("testRoom");
 //		currentRoom.addGameElement(hero);
 //		currentRoom.load();
-		rooms.get("room0").addGameElement(hero);
-		rooms.get("room0").load();
+		rooms.get("testRoom").addGameElement(hero);
+		rooms.get("testRoom").load();
 		
 		gui.setStatusMessage("Good luck!");
 		gui.update();

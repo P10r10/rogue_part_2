@@ -7,16 +7,12 @@ public class Treasure extends GameElement/* implements Pickable*/{
 	
 	public Treasure(Point2D position, String room) {
 		super(position, room);
+		setLayer(2);
 	}
 	
 	@Override
 	public String getName() {
 		return "Treasure";
-	}
-
-	@Override
-	public int getLayer() {
-		return 1;
 	}
 	
 //	public void pick() {//review

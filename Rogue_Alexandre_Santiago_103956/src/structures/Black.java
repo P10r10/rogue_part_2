@@ -22,6 +22,6 @@ public class Black implements ImageTile {
 
 	@Override
 	public int getLayer() {
-		return 1;
+		return 0;
 	}
 }

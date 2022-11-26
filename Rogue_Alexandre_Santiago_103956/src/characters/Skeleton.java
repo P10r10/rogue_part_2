@@ -11,7 +11,7 @@ public class Skeleton extends AliveGameElement {
 
 	public Skeleton(Point2D position, String room) {
 		super(position, room, 5); // initial hp = 5
-		setLayer(1);
+		setLayer(5);
 	}
 
 	@Override
