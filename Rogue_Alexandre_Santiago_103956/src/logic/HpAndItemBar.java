@@ -33,15 +33,23 @@ public class HpAndItemBar {
 		return barComponents;
 	}
 	
-	public void addItem(ImageTile item) { //TODO gestão das slots
-		((GameElement) item).setPosition(new Point2D(7, 10));
-		((GameElement) item).setLayer(1);
-		items.put(0, item);
-		barComponents.add(items.get(0));//review
+	public void addItem(ImageTile item) {
+		
+			for (int i = 0; i < 3; i++) {
+				if (items.putIfAbsent(i, item) == null) {
+					((GameElement) item).setPosition(new Point2D(7 + i, 10));
+					barComponents.add(item);
+					break;
+				}
+			}
 	}
-
+	
+	public int availableSlots() {
+		return items.size();
+	}
+	
 	public ImageTile removeItem(int slot) {
-		barComponents.remove(items.get(0));//review
+		barComponents.remove(items.get(slot));//review
 		return items.remove(slot);
 	}
 	

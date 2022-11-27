@@ -31,33 +31,18 @@ public class Hero extends AliveGameElement {
 			((GameElement) item).setPosition(getPosition());
 			thisRoom.addGameElement(((GameElement) item));
 		}
-
-		// Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
-//		Room currentRoom = GameEngine.getInstance().getGurrentRoom();
-//		GameElement item = currentRoom.elementAt(new Point2D(7 + slot, 10));
-//		if (item != null && !(currentRoom.elementAt(getPosition()) instanceof Pickable)) {
-//			item.setPosition(getPosition());
-//		}
 	}
 
 	public void pick(ImageTile item) {
-
-		((Pickable) item).isPicked(true);
-		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
-		thisRoom.removeGameElement(item);
-		hpAndItemBar.addItem(item);
-
-//		Room currentRoom = GameEngine.getInstance().getGurrentRoom();
-//		for (int i = 0; i < 3; i++) {
-//			GameElement itemInSlot = currentRoom.elementAt(new Point2D(7 + i, 10));
-//			if (itemInSlot == null) {
-//				item.setPosition(new Point2D(7 + i, 10)); // 7 is the x axis of 1st slot
-//				break;
-//			}
-//		}
+		if (hpAndItemBar.availableSlots() < 3) {
+			((Pickable) item).isPicked(true);
+			Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
+			thisRoom.removeGameElement(item);
+			hpAndItemBar.addItem(item);
+		}
 	}
 
-	public HpAndItemBar getHpBar() {
+	public HpAndItemBar getHpAndItemBar() {
 		return hpAndItemBar;
 	}
 

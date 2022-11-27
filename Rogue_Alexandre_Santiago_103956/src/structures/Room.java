@@ -24,7 +24,7 @@ public class Room {
 	public void load() {
 		GameEngine.getInstance().getGui().clearImages();
 		GameEngine.getInstance().getGui().addImages(elements);
-		GameEngine.getInstance().getGui().addImages(getHero().getHpBar().getComponents());
+		GameEngine.getInstance().getGui().addImages(getHero().getHpAndItemBar().getComponents());
 	}
 
 	/* remove? */
