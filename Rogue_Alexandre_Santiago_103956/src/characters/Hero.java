@@ -1,6 +1,6 @@
 package characters;
 
-import interfaces.Pickable;
+import items.Pickable;
 import logic.AliveGameElement;
 import logic.GameElement;
 import logic.GameEngine;
@@ -19,7 +19,7 @@ public class Hero extends AliveGameElement {
 
 	public Hero(Point2D position, String room) {
 		super(position, room, 100); // initial hp = 10
-		setLayer(9);
+		setLayer(5);
 	}
 
 	public void drop(int slot) {
@@ -37,6 +37,7 @@ public class Hero extends AliveGameElement {
 		((Pickable) item).isPicked(true);
 		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
 		thisRoom.removeGameElement(item);
+		hpBar.addItem(item);
 		//TODO HERE item add BAR
 		
 //		Room currentRoom = GameEngine.getInstance().getGurrentRoom();
@@ -89,7 +90,6 @@ public class Hero extends AliveGameElement {
 	public void move() {
 		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
 		Point2D destination = getPosition().plus(Direction.directionFor(keyPressed).asVector());
-		System.out.println(thisRoom.elementAt(destination));//REMOVE
 		if (!(thisRoom.elementAt(destination) instanceof Wall)) { // can't cross walls
 			if (thisRoom.elementAt(destination) instanceof AliveGameElement) { // attacks
 				AliveGameElement elem = ((AliveGameElement) thisRoom.elementAt(destination));

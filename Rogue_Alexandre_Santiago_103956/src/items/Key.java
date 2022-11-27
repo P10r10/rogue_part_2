@@ -1,18 +1,16 @@
 package items;
 
-import interfaces.Pickable;
 import logic.GameElement;
 import pt.iscte.poo.utils.Point2D;
 
 public class Key extends GameElement implements Pickable {
 
 	private String id;
-	private boolean isPicked = false;
 
 	public Key(Point2D position, String room, String id) {
 		super(position, room);
 		this.id = id;
-		setLayer(2);
+		setLayer(3);
 	}
 	
 	public String getId() {
@@ -21,7 +19,11 @@ public class Key extends GameElement implements Pickable {
 	
 	@Override
 	public void isPicked(boolean picked) {
-		isPicked = picked;
+		if (picked) {
+			setLayer(1);
+		} else {
+			setLayer(3);
+		}
 	}
 
 	@Override

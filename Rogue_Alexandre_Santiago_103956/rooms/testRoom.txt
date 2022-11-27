@@ -10,8 +10,7 @@
 ##########
 
 Sword,5,5
-Sword,6,6
-Sword,7,7
-Bat,8,8
-Bat,8,7
-Bat,8,6
+HealingPotion,6,6
+Treasure,7,7
+Armor,4,4
+Key,7,8,"lala"

@@ -14,7 +14,7 @@ public class Bat extends AliveGameElement {
 
 	public Bat(Point2D position, String room) {
 		super(position, room, 3); // initial hp = 3
-		setLayer(5);
+		setLayer(4);
 	}
 
 	public void heal() {

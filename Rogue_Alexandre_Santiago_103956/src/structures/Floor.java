@@ -16,6 +16,6 @@ public class Floor extends GameElement {
 
 	@Override
 	public int getLayer() {
-		return 0;
+		return 2;
 	}
 }

@@ -11,7 +11,7 @@ public class Thug extends AliveGameElement {
 
 	public Thug(Point2D position, String room) {
 		super(position, room, 10); // initial hp = 10
-		setLayer(5);
+		setLayer(4);
 	}
 
 	@Override

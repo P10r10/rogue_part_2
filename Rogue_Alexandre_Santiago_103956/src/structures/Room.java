@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import characters.Hero;
-import interfaces.Pickable;
+import items.Pickable;
 import logic.AliveGameElement;
 import logic.GameElement;
 import logic.GameEngine;

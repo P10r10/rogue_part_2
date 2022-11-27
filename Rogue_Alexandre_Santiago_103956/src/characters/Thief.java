@@ -11,7 +11,7 @@ public class Thief extends AliveGameElement {
 
 	public Thief(Point2D position, String room) {
 		super(position, room, 5); // initial hp = 5
-		setLayer(5);
+		setLayer(4);
 	}
 
 	@Override

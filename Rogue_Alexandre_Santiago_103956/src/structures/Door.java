@@ -20,6 +20,7 @@ public class Door extends GameElement {
 		if (key_id == null) {
 			isOpen = true;
 		}
+		setLayer(2);
 	}
 	
 	public String getDestination() {
@@ -52,10 +53,5 @@ public class Door extends GameElement {
 			return "DoorOpen";
 		}
 		return "DoorClosed";
-	}
-	
-	@Override
-	public int getLayer() {
-		return 3;
 	}
 }
