@@ -1,5 +1,8 @@
 package characters;
 
+import java.util.Map;
+
+import items.Key;
 import items.Pickable;
 import logic.AliveGameElement;
 import logic.GameElement;
@@ -105,18 +108,22 @@ public class Hero extends AliveGameElement {
 				GameEngine.getInstance().getRoom(thisRoom()).addGameElement(this); // add Hero to new Room
 				GameEngine.getInstance().getRoom(door.getDestination()).load();
 			} else { // door is closed
-//						for (int i = 0; i < 3; i++) {
-//							GameElement itemInSlot = room.elementAt(new Point2D(7 + i, 10));
-//							if (itemInSlot instanceof Key) {
-//								Key key = (Key) itemInSlot;
-//								if (key.getId().equals(door.getKey_id())) {
-				door.open();
-				System.out.println("Opened door!");
-//									room.removeGameElement(itemInSlot);//Remove Key!
-//									break;
-//								}
-//							}
-//						}
+				Map<Integer, ImageTile> items = hpAndItemBar.getItems();
+				for (ImageTile item : items.values()) {
+					if (item instanceof Key) {
+						if (((Key) item).getId().equals(door.getKey_id())) {
+							for (int num : items.keySet()) { // takes key from inventory
+								if (items.get(num).equals(item)) {
+									((Key) item).setLayer(0);
+									hpAndItemBar.removeItem(num);
+									break;
+								}
+							}
+							door.open();
+						}
+						break;
+					}
+				}
 			}
 		} else if (thisRoom.elementAt(destination) instanceof Pickable) { // picks
 			pick(thisRoom.elementAt(destination));

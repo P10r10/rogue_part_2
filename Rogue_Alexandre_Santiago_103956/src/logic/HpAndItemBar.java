@@ -48,6 +48,10 @@ public class HpAndItemBar {
 		return items.size();
 	}
 	
+	public Map<Integer, ImageTile> getItems() {
+		return items;
+	}
+
 	public ImageTile removeItem(int slot) {
 		barComponents.remove(items.get(slot));//review
 		return items.remove(slot);
