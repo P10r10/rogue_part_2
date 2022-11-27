@@ -34,6 +34,10 @@ public abstract class GameElement implements ImageTile {
 		return thisRoom;
 	}
 
+	public void setThisRoom(String thisRoom) {
+		this.thisRoom = thisRoom;
+	}
+
 	public void setPosition(Point2D position) {
 		this.position = position;
 	}

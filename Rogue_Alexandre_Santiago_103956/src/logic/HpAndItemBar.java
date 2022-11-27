@@ -1,7 +1,9 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import pt.iscte.poo.gui.ImageTile;
 import pt.iscte.poo.utils.Point2D;
@@ -10,7 +12,7 @@ import structures.Black;
 public class HpAndItemBar {
 
 	private List<ImageTile> barComponents = new ArrayList<>();
-	//private List<ImageTile> items = new ArrayList<>();
+	private Map<Integer, ImageTile> items = new HashMap<>();
 	private int hp;
 
 	public HpAndItemBar(int hp) {
@@ -34,9 +36,15 @@ public class HpAndItemBar {
 	public void addItem(ImageTile item) { //TODO gestão das slots
 		((GameElement) item).setPosition(new Point2D(7, 10));
 		((GameElement) item).setLayer(1);
-		barComponents.add(item);
+		items.put(0, item);
+		barComponents.add(items.get(0));//review
 	}
 
+	public ImageTile removeItem(int slot) {
+		barComponents.remove(items.get(0));//review
+		return items.remove(slot);
+	}
+	
 	public void setHp(int hp) {
 		this.hp = hp;
 	}

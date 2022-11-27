@@ -17,7 +17,7 @@ public class Thug extends AliveGameElement {
 	@Override
 	public String getName() {
 		if (getHp() <= 0) {
-			setLayer(0);
+			setLayer(3);
 			return "DeadThug";
 		}
 		return "Thug";
