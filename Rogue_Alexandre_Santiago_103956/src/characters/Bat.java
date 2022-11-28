@@ -19,6 +19,7 @@ public class Bat extends AliveGameElement {
 
 	public void heal() {
 		if (getHp() < 3) {
+			System.out.println("Bat leeches 1 hp!");
 			setHp(getHp() + 1);
 		}
 	}
@@ -54,5 +55,10 @@ public class Bat extends AliveGameElement {
 		} else { // can move freely
 			setPosition(destination);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return getName();
 	}
 }

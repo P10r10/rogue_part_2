@@ -53,7 +53,7 @@ public class HpAndItemBar {
 	}
 
 	public ImageTile removeItem(int slot) {
-		barComponents.remove(items.get(slot));//review
+		barComponents.remove(items.get(slot));
 		return items.remove(slot);
 	}
 	

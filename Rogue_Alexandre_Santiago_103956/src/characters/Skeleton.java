@@ -41,4 +41,9 @@ public class Skeleton extends AliveGameElement {
 			setPosition(destination);
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return getName();
+	}
 }

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import items.Key;
 import items.Pickable;
+import items.Sword;
 import logic.AliveGameElement;
 import logic.GameElement;
 import logic.GameEngine;
@@ -20,6 +21,7 @@ public class Hero extends AliveGameElement {
 	private final HpAndItemBar hpAndItemBar = new HpAndItemBar(10);
 	private int keyPressed;
 	private boolean isPoisoned = false;
+	private boolean hasSword = false;
 
 	public Hero(Point2D position, String room) {
 		super(position, room, 100); // initial hp = 10
@@ -30,6 +32,9 @@ public class Hero extends AliveGameElement {
 		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
 		ImageTile item = hpAndItemBar.removeItem(slot);
 		if (item != null) {
+			if (item instanceof Sword) {
+				hasSword = false;
+			}
 			((Pickable) item).isPicked(false);
 			((GameElement) item).setPosition(getPosition());
 			thisRoom.addGameElement(((GameElement) item));
@@ -92,7 +97,12 @@ public class Hero extends AliveGameElement {
 
 		if (thisRoom.elementAt(destination) instanceof AliveGameElement) { // attacks
 			AliveGameElement elem = ((AliveGameElement) thisRoom.elementAt(destination));
-			elem.takesDamage(1);// TODO with sword
+			int damage = 1;
+			if (hasSword) {
+				damage++;
+			}
+			System.out.println("You deal " + damage + " damage to " + elem);
+			elem.takesDamage(damage);// TODO with sword
 			if (elem.getHp() <= 0) { // enemy dies
 				thisRoom.removeGameElement(elem);
 			}
@@ -126,6 +136,9 @@ public class Hero extends AliveGameElement {
 				}
 			}
 		} else if (thisRoom.elementAt(destination) instanceof Pickable) { // picks
+			if (thisRoom.elementAt(destination) instanceof Sword) {
+				hasSword = true;
+			}
 			pick(thisRoom.elementAt(destination));
 		} else { // can move freely
 			setPosition(destination);

@@ -37,4 +37,9 @@ public class Scorpio extends AliveGameElement {
 			setPosition(destination);
 		}	
 	}
+	
+	@Override
+	public String toString() {
+		return getName();
+	}
 }
