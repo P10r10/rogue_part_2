@@ -2,6 +2,7 @@ package characters;
 
 import java.util.Map;
 
+import items.Armor;
 import items.Key;
 import items.Pickable;
 import items.Sword;
@@ -22,9 +23,11 @@ public class Hero extends AliveGameElement {
 	private int keyPressed;
 	private boolean isPoisoned = false;
 	private boolean hasSword = false;
+	private boolean hasArmor = false;
+	private boolean canBlock = true;
 
 	public Hero(Point2D position, String room) {
-		super(position, room, 100); // initial hp = 10
+		super(position, room, 10); // initial hp = 10
 		setLayer(5);
 	}
 
@@ -34,6 +37,9 @@ public class Hero extends AliveGameElement {
 		if (item != null) {
 			if (item instanceof Sword) {
 				hasSword = false;
+			}
+			if (item instanceof Armor) {
+				hasArmor = false;
 			}
 			((Pickable) item).isPicked(false);
 			((GameElement) item).setPosition(getPosition());
@@ -77,12 +83,18 @@ public class Hero extends AliveGameElement {
 
 	@Override
 	public void takesDamage(int damage) {
-		// TODO com armadura 50% dos ataques não dao dano
-		setHp(getHp() - damage);
-		hpAndItemBar.setHp(getHp());
-		if (getHp() <= 0) {
-			GameEngine.getInstance().getGui().setMessage("YOU ARE DEAD!!! GAME OVER");
-			GameEngine.getInstance().getGui().dispose();
+		if (hasArmor && canBlock) {
+			System.out.println("You blocked damage with your armor!");
+			canBlock = false;
+		} else {
+			setHp(getHp() - damage);
+			System.out.println("You take " + damage + " damage");
+			hpAndItemBar.setHp(getHp());
+			if (getHp() <= 0) {
+				GameEngine.getInstance().getGui().setMessage("YOU ARE DEAD!!! GAME OVER");
+				GameEngine.getInstance().getGui().dispose();
+			}
+			canBlock = true;
 		}
 	}
 
@@ -102,7 +114,7 @@ public class Hero extends AliveGameElement {
 				damage++;
 			}
 			System.out.println("You deal " + damage + " damage to " + elem);
-			elem.takesDamage(damage);// TODO with sword
+			elem.takesDamage(damage);
 			if (elem.getHp() <= 0) { // enemy dies
 				thisRoom.removeGameElement(elem);
 			}
@@ -131,13 +143,16 @@ public class Hero extends AliveGameElement {
 							}
 							door.open();
 						}
-						break;
+						break;//tirar por eventual bug na chave? testar!
 					}
 				}
 			}
 		} else if (thisRoom.elementAt(destination) instanceof Pickable) { // picks
 			if (thisRoom.elementAt(destination) instanceof Sword) {
 				hasSword = true;
+			}
+			if (thisRoom.elementAt(destination) instanceof Armor) {
+				hasArmor = true;
 			}
 			pick(thisRoom.elementAt(destination));
 		} else { // can move freely

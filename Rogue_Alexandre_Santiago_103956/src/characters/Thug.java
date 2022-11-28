@@ -1,5 +1,7 @@
 package characters;
 
+import java.util.Random;
+
 import logic.AliveGameElement;
 import logic.GameEngine;
 import pt.iscte.poo.utils.Point2D;
@@ -29,7 +31,9 @@ public class Thug extends AliveGameElement {
 		Point2D destination = thisRoom.wayToHero(this);
 
 		if (thisRoom.elementAt(destination) instanceof Hero) { // attacks hero
-			((Hero) thisRoom.elementAt(destination)).takesDamage(1);// specialize
+			if (new Random().nextDouble() <= 0.3) { // only damages in 30% of attacks
+				((Hero) thisRoom.elementAt(destination)).takesDamage(3);
+			}
 		} else if (thisRoom.elementAt(destination) instanceof Wall || thisRoom.elementAt(destination) instanceof Door
 				|| thisRoom.elementAt(destination) instanceof AliveGameElement) {
 			return; // can't cross walls, doors or other creatures

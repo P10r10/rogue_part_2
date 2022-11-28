@@ -19,7 +19,7 @@ public class GameEngine implements Observer {
 	private static GameEngine INSTANCE = null;
 	private ImageMatrixGUI gui = ImageMatrixGUI.getInstance();
 
-	private Hero hero = new Hero(new Point2D(1, 1), "room0");
+	private Hero hero = new Hero(new Point2D(1, 1), "testRoom");
 	private Map<String, Room> rooms = new HashMap<>();
 
 	private int turns;
@@ -57,8 +57,8 @@ public class GameEngine implements Observer {
 		rooms.put("room2", FileReader.createRoom("room2"));
 		rooms.put("room3", FileReader.createRoom("room3"));
 		
-		rooms.get("room0").addGameElement(hero);
-		rooms.get("room0").load();
+		rooms.get("testRoom").addGameElement(hero);
+		rooms.get("testRoom").load();
 		
 		gui.setStatusMessage("Good luck!");
 		gui.update();
@@ -69,7 +69,7 @@ public class GameEngine implements Observer {
 		int keyPressed = ((ImageMatrixGUI) source).keyPressed();
 		if (keyPressed >= KeyEvent.VK_LEFT && keyPressed <= KeyEvent.VK_DOWN) {
 			hero.setKeyPressed(keyPressed);
-			if (hero.isPoisoned()) {
+			if (hero.isPoisoned()) {//move bellow?
 				hero.takesDamage(1);
 			}
 		}
