@@ -9,5 +9,5 @@
 #        #
 ##########
 
-Armor,3,3
-Skeleton,8,8
+HealingPotion,3,3
+Bat,8,8

@@ -17,7 +17,7 @@ public class Bat extends AliveGameElement {
 		setLayer(4);
 	}
 
-	public void heal() {
+	private void heal() {
 		if (getHp() < 3) {
 			System.out.println("Bat leeches 1 hp!");
 			setHp(getHp() + 1);

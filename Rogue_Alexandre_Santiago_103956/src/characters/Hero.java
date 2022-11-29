@@ -3,6 +3,7 @@ package characters;
 import java.util.Map;
 
 import items.Armor;
+import items.HealingPotion;
 import items.Key;
 import items.Pickable;
 import items.Sword;
@@ -30,6 +31,17 @@ public class Hero extends AliveGameElement {
 		super(position, room, 10); // initial hp = 10
 		setLayer(5);
 	}
+	
+	private void heal() {
+		if (getHp() < 10) {
+			System.out.println("You heal!");
+			setHp(getHp() + 5);
+		}
+		if (getHp() > 10) {
+			setHp(10);
+		}
+		hpAndItemBar.setHp(getHp());
+	}
 
 	public void drop(int slot) {
 		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
@@ -40,6 +52,11 @@ public class Hero extends AliveGameElement {
 			}
 			if (item instanceof Armor) {
 				hasArmor = false;
+			}
+			if (item instanceof HealingPotion && getHp() < 10) {
+				heal(); // consumes potion only with hp missing
+				((GameElement) item).setLayer(0);
+				return;
 			}
 			((Pickable) item).isPicked(false);
 			((GameElement) item).setPosition(getPosition());
