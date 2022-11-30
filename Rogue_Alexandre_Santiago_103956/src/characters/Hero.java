@@ -47,6 +47,7 @@ public class Hero extends AliveGameElement {
 		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
 		ImageTile item = hpAndItemBar.removeItem(slot);
 		if (item != null) {
+			((Pickable) item).isPicked(false);
 			if (item instanceof Sword) {
 				hasSword = false;
 			}
@@ -55,10 +56,10 @@ public class Hero extends AliveGameElement {
 			}
 			if (item instanceof HealingPotion && getHp() < 10) {
 				heal(); // consumes potion only with hp missing
+				isPoisoned = false;
 				((GameElement) item).setLayer(0);
 				return;
 			}
-			((Pickable) item).isPicked(false);
 			((GameElement) item).setPosition(getPosition());
 			thisRoom.addGameElement(((GameElement) item));
 		}

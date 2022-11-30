@@ -69,9 +69,6 @@ public class GameEngine implements Observer {
 		int keyPressed = ((ImageMatrixGUI) source).keyPressed();
 		if (keyPressed >= KeyEvent.VK_LEFT && keyPressed <= KeyEvent.VK_DOWN) {
 			hero.setKeyPressed(keyPressed);
-			if (hero.isPoisoned()) {//move bellow?
-				hero.takesDamage(1);
-			}
 		}
 		switch (keyPressed) {
 		case KeyEvent.VK_1:
@@ -83,6 +80,9 @@ public class GameEngine implements Observer {
 		case KeyEvent.VK_3:
 			hero.drop(2); // drops item in slot 3
 			break;
+		}
+		if (hero.isPoisoned()) {
+			hero.takesDamage(1);
 		}
 		getRoom(hero.thisRoom()).moveEnemies();
 		turns++;

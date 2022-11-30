@@ -9,5 +9,8 @@
 #        #
 ##########
 
-HealingPotion,3,3
-Bat,8,8
+Thug,2,2
+HealingPotion,2,2
+Armor,7,7
+Sword,8,8
+Key,5,5,"aa"

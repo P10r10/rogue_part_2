@@ -18,7 +18,7 @@ public class Scorpio extends AliveGameElement {
 	public String getName() {
 		if (getHp() <= 0) {
 			setLayer(3);
-			return "DeadSkeleton";//create dead scorpio
+			return "DeadScorpio";
 		}
 		return "Scorpio";
 	}
@@ -30,6 +30,7 @@ public class Scorpio extends AliveGameElement {
 		
 		if (thisRoom.elementAt(destination) instanceof Hero) { // attacks hero
 			((Hero) thisRoom.elementAt(destination)).setPoisoned();
+			System.out.println("You are poisoned...");
 		} else if (thisRoom.elementAt(destination) instanceof Wall || thisRoom.elementAt(destination) instanceof Door
 				|| thisRoom.elementAt(destination) instanceof AliveGameElement) {
 			return; // can't cross walls, doors or other creatures

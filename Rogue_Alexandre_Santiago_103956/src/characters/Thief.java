@@ -18,7 +18,7 @@ public class Thief extends AliveGameElement {
 	public String getName() {
 		if (getHp() <= 0) {
 			setLayer(3);
-			return "DeadSkeleton";// make dead thief
+			return "DeadThief";
 		}
 		return "Thief";
 	}
