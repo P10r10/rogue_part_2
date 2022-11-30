@@ -1,16 +1,22 @@
-##########
+#### #####
+#        #
+#        #
+#        #
+          
 #        #
 #        #
 #        #
 #        #
-#        #
-#        #
-#        #
-#        #
-##########
+#### #####
 
-Thug,2,2
 HealingPotion,2,2
 Armor,7,7
 Sword,8,8
-Key,5,5,"aa"
+Key,5,5,KEY0
+Key,6,5,KEY1
+Key,7,5,KEY2
+Key,2,2,KEYZ
+Door,4,0,room1,4,0,KEY0
+Door,9,4,room2,0,4,KEY1
+Door,4,9,room1,4,0,KEY2
+Door,0,4,room1,4,0,KEY3

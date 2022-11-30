@@ -31,7 +31,7 @@ public class Hero extends AliveGameElement {
 		super(position, room, 10); // initial hp = 10
 		setLayer(5);
 	}
-	
+
 	private void heal() {
 		if (getHp() < 10) {
 			System.out.println("You heal!");
@@ -150,18 +150,16 @@ public class Hero extends AliveGameElement {
 			} else { // door is closed
 				Map<Integer, ImageTile> items = hpAndItemBar.getItems();
 				for (ImageTile item : items.values()) {
-					if (item instanceof Key) {
-						if (((Key) item).getId().equals(door.getKey_id())) {
-							for (int num : items.keySet()) { // takes key from inventory
-								if (items.get(num).equals(item)) {
-									((Key) item).setLayer(0);
-									hpAndItemBar.removeItem(num);
-									break;
-								}
+					if (item instanceof Key && ((Key) item).getId().equals(door.getKey_id())) { // key matches
+						for (int num : items.keySet()) { // takes key from inventory
+							if (items.get(num).equals(item)) {
+								((Key) item).setLayer(0);
+								hpAndItemBar.removeItem(num);
+								break;
 							}
-							door.open();
 						}
-						break;//tirar por eventual bug na chave? testar!
+						door.open();
+						break;
 					}
 				}
 			}

@@ -27,7 +27,6 @@ public class Room {
 		GameEngine.getInstance().getGui().addImages(getHero().getHpAndItemBar().getComponents());
 	}
 
-	/* remove? */
 	private Hero getHero() {
 		for (ImageTile gameElement : elements) {
 			if (gameElement instanceof Hero)
@@ -35,9 +34,8 @@ public class Room {
 		}
 		return null;
 	}
-	/* remove? */
 
-	private Point2D heroPosition() { // stays??
+	private Point2D heroPosition() {
 		for (ImageTile gameElement : elements) {
 			if (gameElement instanceof Hero)
 				return gameElement.getPosition();
