@@ -10,6 +10,4 @@
 ##########
 
 Sword,5,5
-Armor,5,6
-HealingPotion,5,7
-Key,5,8,"aasa"
+Thief,8,8

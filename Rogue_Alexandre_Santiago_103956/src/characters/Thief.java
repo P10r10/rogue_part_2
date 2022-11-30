@@ -8,6 +8,8 @@ import structures.Room;
 import structures.Wall;
 
 public class Thief extends AliveGameElement {
+	
+	private boolean hasItem = false;
 
 	public Thief(Point2D position, String room) {
 		super(position, room, 5); // initial hp = 5
@@ -27,9 +29,13 @@ public class Thief extends AliveGameElement {
 	public void move() {
 		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
 		Point2D destination = thisRoom.wayToHero(this);
+		if (hasItem) {
+			destination = thisRoom.awayFromHero(this);
+		}
 
 		if (thisRoom.elementAt(destination) instanceof Hero) { // attacks hero
 			System.out.println("ROUBOU!");// TODO implementar fuga DIRECTION.OPOSITE
+			hasItem = true;
 		} else if (thisRoom.elementAt(destination) instanceof Wall || thisRoom.elementAt(destination) instanceof Door
 				|| thisRoom.elementAt(destination) instanceof AliveGameElement) {
 			return; // can't cross walls, doors or other creatures

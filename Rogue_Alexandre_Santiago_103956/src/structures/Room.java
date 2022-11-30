@@ -48,6 +48,12 @@ public class Room {
 		Point2D destination = elem.getPosition().plus(directionToHero);
 		return destination;
 	}
+	
+	public Point2D awayFromHero(AliveGameElement elem) {
+		Vector2D directionToHero = elem.getPosition().directionTo(heroPosition()).opposite().asVector();
+		Point2D destination = elem.getPosition().plus(directionToHero);
+		return destination;
+	}
 
 	public void removeGameElement(ImageTile gameElement) {
 		elements.remove(gameElement);
