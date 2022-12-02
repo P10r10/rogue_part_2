@@ -20,7 +20,7 @@ public class Door extends GameElement {
 		if (key_id == null) {
 			isOpen = true;
 		}
-		setLayer(2);
+		setLayer(3);
 	}
 	
 	public String getDestination() {

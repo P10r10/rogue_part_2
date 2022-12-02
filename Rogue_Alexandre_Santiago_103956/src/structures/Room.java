@@ -2,8 +2,9 @@ package structures;
 
 import java.util.List;
 
+import Interfaces.Movable;
+import Interfaces.Pickable;
 import characters.Hero;
-import items.Pickable;
 import logic.AliveGameElement;
 import logic.GameElement;
 import logic.GameEngine;
@@ -66,7 +67,7 @@ public class Room {
 	public void moveEnemies() {
 		for (ImageTile elem : elements) {
 			if (elem instanceof AliveGameElement && !(elem instanceof Hero))
-				((AliveGameElement) elem).move();
+				((Movable) elem).move();
 		}
 	}
 

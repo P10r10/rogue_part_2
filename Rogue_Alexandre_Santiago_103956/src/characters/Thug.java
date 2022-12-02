@@ -2,6 +2,7 @@ package characters;
 
 import java.util.Random;
 
+import Interfaces.Movable;
 import logic.AliveGameElement;
 import logic.GameEngine;
 import pt.iscte.poo.utils.Point2D;
@@ -9,17 +10,17 @@ import structures.Door;
 import structures.Room;
 import structures.Wall;
 
-public class Thug extends AliveGameElement {
+public class Thug extends AliveGameElement implements Movable {
 
 	public Thug(Point2D position, String room) {
 		super(position, room, 10); // initial hp = 10
-		setLayer(4);
+		setLayer(6);
 	}
 
 	@Override
 	public String getName() {
 		if (getHp() <= 0) {
-			setLayer(3);
+			setLayer(4);
 			return "DeadThug";
 		}
 		return "Thug";

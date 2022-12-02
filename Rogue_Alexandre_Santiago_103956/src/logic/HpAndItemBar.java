@@ -89,7 +89,7 @@ public class HpAndItemBar {
 
 		@Override
 		public int getLayer() {
-			return 0;
+			return 1;
 		}
 	}
 }

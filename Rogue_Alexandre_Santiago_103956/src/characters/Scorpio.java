@@ -1,5 +1,6 @@
 package characters;
 
+import Interfaces.Movable;
 import logic.AliveGameElement;
 import logic.GameEngine;
 import pt.iscte.poo.utils.Point2D;
@@ -7,17 +8,17 @@ import structures.Door;
 import structures.Room;
 import structures.Wall;
 
-public class Scorpio extends AliveGameElement {
+public class Scorpio extends AliveGameElement implements Movable {
 	
 	public Scorpio(Point2D position, String room) {
 		super(position, room, 2); // initial hp = 2
-		setLayer(4);
+		setLayer(6);
 	}
 
 	@Override
 	public String getName() {
 		if (getHp() <= 0) {
-			setLayer(3);
+			setLayer(4);
 			return "DeadScorpio";
 		}
 		return "Scorpio";

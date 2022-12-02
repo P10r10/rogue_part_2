@@ -29,6 +29,4 @@ public abstract class AliveGameElement extends GameElement {
 			isAlive = false;
 		}
 	}
-
-	public abstract void move();
 }

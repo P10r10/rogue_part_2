@@ -2,10 +2,11 @@ package characters;
 
 import java.util.Map;
 
+import Interfaces.Movable;
+import Interfaces.Pickable;
 import items.Armor;
 import items.HealingPotion;
 import items.Key;
-import items.Pickable;
 import items.Sword;
 import logic.AliveGameElement;
 import logic.GameElement;
@@ -18,7 +19,7 @@ import structures.Door;
 import structures.Room;
 import structures.Wall;
 
-public class Hero extends AliveGameElement {
+public class Hero extends AliveGameElement implements Movable {
 
 	private final HpAndItemBar hpAndItemBar = new HpAndItemBar(10);
 	private int keyPressed;
@@ -29,7 +30,7 @@ public class Hero extends AliveGameElement {
 
 	public Hero(Point2D position, String room) {
 		super(position, room, 10); // initial hp = 10
-		setLayer(5);
+		setLayer(7);
 	}
 
 	private void heal() {

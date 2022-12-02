@@ -1,5 +1,6 @@
 package items;
 
+import Interfaces.Pickable;
 import logic.GameElement;
 import logic.GameEngine;
 import pt.iscte.poo.utils.Point2D;
@@ -8,7 +9,7 @@ public class Treasure extends GameElement implements Pickable{
 	
 	public Treasure(Point2D position, String room) {
 		super(position, room);
-		setLayer(3);
+		setLayer(5);
 	}
 	
 	@Override

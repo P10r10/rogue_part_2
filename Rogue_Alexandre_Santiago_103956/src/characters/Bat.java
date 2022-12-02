@@ -1,5 +1,6 @@
 package characters;
 
+import Interfaces.Movable;
 import logic.AliveGameElement;
 import logic.GameEngine;
 import pt.iscte.poo.utils.Direction;
@@ -8,13 +9,13 @@ import structures.Door;
 import structures.Room;
 import structures.Wall;
 
-public class Bat extends AliveGameElement {
+public class Bat extends AliveGameElement implements Movable {
 
 	private boolean canDamage = true;
 
 	public Bat(Point2D position, String room) {
 		super(position, room, 3); // initial hp = 3
-		setLayer(4);
+		setLayer(6);
 	}
 
 	private void heal() {
@@ -27,7 +28,7 @@ public class Bat extends AliveGameElement {
 	@Override
 	public String getName() {
 		if (getHp() <= 0) {
-			setLayer(3);
+			setLayer(4);
 			return "DeadBat";
 		}
 		return "Bat";

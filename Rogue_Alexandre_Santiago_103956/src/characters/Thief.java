@@ -1,5 +1,6 @@
 package characters;
 
+import Interfaces.Movable;
 import logic.AliveGameElement;
 import logic.GameEngine;
 import pt.iscte.poo.utils.Point2D;
@@ -7,19 +8,19 @@ import structures.Door;
 import structures.Room;
 import structures.Wall;
 
-public class Thief extends AliveGameElement {
+public class Thief extends AliveGameElement implements Movable {
 	
 	private boolean hasItem = false;
 
 	public Thief(Point2D position, String room) {
 		super(position, room, 5); // initial hp = 5
-		setLayer(4);
+		setLayer(6);
 	}
 
 	@Override
 	public String getName() {
 		if (getHp() <= 0) {
-			setLayer(3);
+			setLayer(4);
 			return "DeadThief";
 		}
 		return "Thief";
