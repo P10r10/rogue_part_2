@@ -2,6 +2,7 @@ package logic;
 
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import characters.Hero;
@@ -89,8 +90,15 @@ public class GameEngine implements Observer {
 		gui.setStatusMessage("Turn: " + turns + " Points: " + hero.getPoints());
 		gui.update();
 		if (hero.hasWon()) {
-			GameEngine.getInstance().getGui().setMessage("Congratulations!!! YOU WON!");
-			GameEngine.getInstance().getGui().dispose();
+			List<Score> scores = FileReader.readScores();
+			scores.sort((p1,p2) -> p2.getScore() - p1.getScore());
+			String highScores = "";
+			for (int i = 0; i < 5 ; i++) {
+				highScores += scores.get(i) + "\n";
+			}
+			String nameString = gui.askUser("Congratulations! Insert your name: ");
+			gui.setMessage("     TOP 5 SCORES\n\n" + highScores + "\n");
+			gui.dispose();
 		}
 	}
 }

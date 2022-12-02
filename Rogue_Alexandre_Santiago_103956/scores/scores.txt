@@ -1,0 +1,5 @@
+Louise,20
+John,5
+Lu,15
+Mary,10
+Elias,25

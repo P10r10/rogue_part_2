@@ -17,7 +17,7 @@ public class FileReader {
 		List<ImageTile> elements = new ArrayList<>();
 		try {
 			Scanner scanner = new Scanner(new File("rooms\\" + name + ".txt"));
-			for (int y = 0; y < 10; y++) { //1st part of file with walls
+			for (int y = 0; y < 10; y++) { // 1st part of file with walls
 				String line = scanner.nextLine();
 				for (int x = 0; x < 10; x++) {
 					if (line.charAt(x) == '#') {
@@ -27,8 +27,8 @@ public class FileReader {
 					}
 				}
 			}
-			scanner.nextLine(); //reads empty line
-			while (scanner.hasNextLine()) { //2nd part of file with game elements
+			scanner.nextLine(); // reads empty line
+			while (scanner.hasNextLine()) { // 2nd part of file with game elements
 				String[] args = scanner.nextLine().split(",");
 				elements.add(GameElement.create(args, name));
 			}
@@ -36,6 +36,21 @@ public class FileReader {
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
-		return new Room(name, elements) ;
+		return new Room(name, elements);
+	}
+
+	public static List<Score> readScores() {
+		List<Score> scores = new ArrayList<>();
+		try {
+			Scanner scanner = new Scanner(new File("scores\\scores.txt"));
+			while (scanner.hasNextLine()) {
+				String[] split = scanner.nextLine().split(",");
+				scores.add(new Score(split[0], Integer.parseInt(split[1])));
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		return scores;
 	}
 }
