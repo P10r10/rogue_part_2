@@ -2,7 +2,6 @@ package logic;
 
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import characters.Hero;
@@ -20,7 +19,7 @@ public class GameEngine implements Observer {
 	private static GameEngine INSTANCE = null;
 	private ImageMatrixGUI gui = ImageMatrixGUI.getInstance();
 
-	private Hero hero = new Hero(new Point2D(1, 1), "testRoom2");
+	private Hero hero = new Hero(new Point2D(1, 1), "room0");
 	private Map<String, Room> rooms = new HashMap<>();
 
 	private int turns;
@@ -58,8 +57,8 @@ public class GameEngine implements Observer {
 		rooms.put("room2", FileReader.createRoom("room2"));
 		rooms.put("room3", FileReader.createRoom("room3"));
 		
-		rooms.get("testRoom2").addGameElement(hero);
-		rooms.get("testRoom2").load();
+		rooms.get("room0").addGameElement(hero);
+		rooms.get("room0").load();
 		
 		gui.setStatusMessage("Good luck!");
 		gui.update();
@@ -90,14 +89,9 @@ public class GameEngine implements Observer {
 		gui.setStatusMessage("Turn: " + turns + " Points: " + hero.getPoints());
 		gui.update();
 		if (hero.hasWon()) {
-			List<Score> scores = FileReader.readScores();
-			scores.sort((p1,p2) -> p2.getScore() - p1.getScore());
-			String highScores = "";
-			for (int i = 0; i < 5 ; i++) {
-				highScores += scores.get(i) + "\n";
-			}
-			String nameString = gui.askUser("Congratulations! Insert your name: ");
-			gui.setMessage("     TOP 5 SCORES\n\n" + highScores + "\n");
+			String name = gui.askUser("Congratulations! Insert your name: ");
+			Score.addScoreToFile(name, hero.getPoints());
+			gui.setMessage("     TOP 5 SCORES\n\n" + Score.getHighScores() + "\n");
 			gui.dispose();
 		}
 	}

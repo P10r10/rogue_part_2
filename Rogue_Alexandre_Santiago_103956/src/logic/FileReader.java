@@ -47,6 +47,7 @@ public class FileReader {
 				String[] split = scanner.nextLine().split(",");
 				scores.add(new Score(split[0], Integer.parseInt(split[1])));
 			}
+			scanner.close();
 
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
