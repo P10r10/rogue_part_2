@@ -2,6 +2,7 @@ package characters;
 
 import java.util.Random;
 
+import Interfaces.AwardsPoints;
 import Interfaces.Movable;
 import logic.AliveGameElement;
 import logic.GameEngine;
@@ -10,11 +11,16 @@ import structures.Door;
 import structures.Room;
 import structures.Wall;
 
-public class Thug extends AliveGameElement implements Movable {
+public class Thug extends AliveGameElement implements Movable, AwardsPoints {
 
 	public Thug(Point2D position, String room) {
 		super(position, room, 10); // initial hp = 10
 		setLayer(6);
+	}
+	
+	@Override
+	public int points() {
+		return 23;
 	}
 
 	@Override

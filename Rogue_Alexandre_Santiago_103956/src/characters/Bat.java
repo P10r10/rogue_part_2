@@ -1,5 +1,7 @@
 package characters;
 
+import Interfaces.AwardsPoints;
+import Interfaces.Healable;
 import Interfaces.Movable;
 import logic.AliveGameElement;
 import logic.GameEngine;
@@ -9,7 +11,7 @@ import structures.Door;
 import structures.Room;
 import structures.Wall;
 
-public class Bat extends AliveGameElement implements Movable {
+public class Bat extends AliveGameElement implements Movable, Healable, AwardsPoints {
 
 	private boolean canDamage = true;
 
@@ -18,11 +20,16 @@ public class Bat extends AliveGameElement implements Movable {
 		setLayer(6);
 	}
 
-	private void heal() {
+	public void heal() {
 		if (getHp() < 3) {
 			System.out.println("Bat leeches 1 hp!");
 			setHp(getHp() + 1);
 		}
+	}
+	
+	@Override
+	public int points() {
+		return 11;
 	}
 
 	@Override

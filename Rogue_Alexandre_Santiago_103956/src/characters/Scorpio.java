@@ -1,5 +1,6 @@
 package characters;
 
+import Interfaces.AwardsPoints;
 import Interfaces.Movable;
 import logic.AliveGameElement;
 import logic.GameEngine;
@@ -8,13 +9,18 @@ import structures.Door;
 import structures.Room;
 import structures.Wall;
 
-public class Scorpio extends AliveGameElement implements Movable {
+public class Scorpio extends AliveGameElement implements Movable, AwardsPoints {
 	
 	public Scorpio(Point2D position, String room) {
 		super(position, room, 2); // initial hp = 2
 		setLayer(6);
 	}
-
+	
+	@Override
+	public int points() {
+		return 17;
+	}
+	
 	@Override
 	public String getName() {
 		if (getHp() <= 0) {

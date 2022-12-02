@@ -2,12 +2,15 @@ package characters;
 
 import java.util.Map;
 
+import Interfaces.AwardsPoints;
+import Interfaces.Healable;
 import Interfaces.Movable;
 import Interfaces.Pickable;
 import items.Armor;
 import items.HealingPotion;
 import items.Key;
 import items.Sword;
+import items.Treasure;
 import logic.AliveGameElement;
 import logic.GameElement;
 import logic.GameEngine;
@@ -19,7 +22,7 @@ import structures.Door;
 import structures.Room;
 import structures.Wall;
 
-public class Hero extends AliveGameElement implements Movable {
+public class Hero extends AliveGameElement implements Movable, Healable {
 
 	private final HpAndItemBar hpAndItemBar = new HpAndItemBar(10);
 	private int keyPressed;
@@ -27,13 +30,15 @@ public class Hero extends AliveGameElement implements Movable {
 	private boolean hasSword = false;
 	private boolean hasArmor = false;
 	private boolean canBlock = true;
+	private boolean hasWon = false;
+	private int points = 0;
 
 	public Hero(Point2D position, String room) {
 		super(position, room, 10); // initial hp = 10
 		setLayer(7);
 	}
 
-	private void heal() {
+	public void heal() {
 		if (getHp() < 10) {
 			System.out.println("You heal!");
 			setHp(getHp() + 5);
@@ -42,6 +47,17 @@ public class Hero extends AliveGameElement implements Movable {
 			setHp(10);
 		}
 		hpAndItemBar.setHp(getHp());
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void addPoints(int pointsToAdd) {
+		points += pointsToAdd;
+		if (points < 0) {
+			points = 0;
+		}
 	}
 
 	public void drop(int slot) {
@@ -58,6 +74,7 @@ public class Hero extends AliveGameElement implements Movable {
 			if (item instanceof HealingPotion && getHp() < 10) {
 				heal(); // consumes potion only with hp missing
 				isPoisoned = false;
+				addPoints(((AwardsPoints) item).points());
 				((GameElement) item).setLayer(0);
 				return;
 			}
@@ -73,8 +90,16 @@ public class Hero extends AliveGameElement implements Movable {
 			thisRoom.removeGameElement(item);
 			hpAndItemBar.addItem(item);
 		}
+		if (item instanceof Treasure) {
+			addPoints(((AwardsPoints) item).points());
+			hasWon = true;
+		}
 	}
 
+	public boolean hasWon( ) {
+		return hasWon;
+	}
+	
 	public HpAndItemBar getHpAndItemBar() {
 		return hpAndItemBar;
 	}
@@ -135,6 +160,7 @@ public class Hero extends AliveGameElement implements Movable {
 			System.out.println("You deal " + damage + " damage to " + elem);
 			elem.takesDamage(damage);
 			if (elem.getHp() <= 0) { // enemy dies
+				addPoints(((AwardsPoints) elem).points());
 				thisRoom.removeGameElement(elem);
 			}
 		} else if (thisRoom.elementAt(destination) instanceof Door) { // interaction with doors

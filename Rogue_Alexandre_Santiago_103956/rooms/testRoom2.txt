@@ -9,5 +9,4 @@
 #        #
 ##########
 
-Sword,5,5
-Thief,8,8
+Treasure,5,5

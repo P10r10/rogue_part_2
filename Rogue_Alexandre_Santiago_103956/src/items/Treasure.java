@@ -1,11 +1,11 @@
 package items;
 
+import Interfaces.AwardsPoints;
 import Interfaces.Pickable;
 import logic.GameElement;
-import logic.GameEngine;
 import pt.iscte.poo.utils.Point2D;
 
-public class Treasure extends GameElement implements Pickable{
+public class Treasure extends GameElement implements Pickable, AwardsPoints {
 	
 	public Treasure(Point2D position, String room) {
 		super(position, room);
@@ -15,9 +15,17 @@ public class Treasure extends GameElement implements Pickable{
 	@Override
 	public void isPicked(boolean picked) {
 		if (picked) {
-			GameEngine.getInstance().getGui().setMessage("Congratulations!!! YOU WON!");
-			GameEngine.getInstance().getGui().dispose();
+			setLayer(2);
+		//	GameEngine.getInstance().getGui().setMessage("Congratulations!!! YOU WON!");
+		//	GameEngine.getInstance().getGui().dispose();
+//		} else {
+//			setLayer(5);
 		}
+	}
+	
+	@Override
+	public int points() {
+		return 29;
 	}
 	
 	@Override
