@@ -2,11 +2,14 @@
 #        #
 #        #
 #        #
-#        #
+##      ##
 #        #
 #        #
 #        #
 #        #
 ##########
 
-Treasure,5,5
+Treasure,3,3
+Skeleton,5,5
+Bat,5,6
+Scorpio,5,7

@@ -1,10 +1,11 @@
 package logic;
 
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Score {
 	private String name;
@@ -19,28 +20,36 @@ public class Score {
 		return score;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("%9s: %d PTS", name, score);
 	}
 	
-	public static String getHighScores() {
-		List<Score> scores = FileReader.readScores();
-		scores.sort((p1,p2) -> p2.getScore() - p1.getScore());
-		String highScores = "";
-		for (int i = 0; i < 5 ; i++) {
-			highScores += scores.get(i) + "\n";
-		}
-		return highScores;
-	}
-	
-	public static void addScoreToFile(String name, int points) {
-		try (FileWriter fw = new FileWriter("scores\\scores.txt", true)) {
-			PrintWriter pw = new PrintWriter(fw);
-			pw.println(name + "," + points);
+	public static String getHighScores(String name, int points) {
+		List<Score> scores = new ArrayList<>();
+		String res = "";
+		try (Scanner scanner = new Scanner(new File("scores\\scores.txt"))) {
+			while (scanner.hasNextLine()) {
+				String[] split = scanner.nextLine().split(",");
+				scores.add(new Score(split[0], Integer.parseInt(split[1])));
+			}
+			scores.add(new Score(name, points));
+			scores.sort((s1, s2) -> s2.getScore() - s1.getScore());
+			scores.remove(scores.size() - 1);
+			PrintWriter pw = new PrintWriter(new File("scores\\scores.txt"));
+			for (Score score : scores) {
+				pw.println(score.getName() + "," + score.getScore());
+				res += score + "\n";
+			}
+			scanner.close();
 			pw.close();
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		return res;
 	}
 }

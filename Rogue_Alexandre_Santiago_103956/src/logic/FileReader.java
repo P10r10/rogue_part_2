@@ -38,20 +38,4 @@ public class FileReader {
 		}
 		return new Room(name, elements);
 	}
-
-	public static List<Score> readScores() {
-		List<Score> scores = new ArrayList<>();
-		try {
-			Scanner scanner = new Scanner(new File("scores\\scores.txt"));
-			while (scanner.hasNextLine()) {
-				String[] split = scanner.nextLine().split(",");
-				scores.add(new Score(split[0], Integer.parseInt(split[1])));
-			}
-			scanner.close();
-
-		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-		return scores;
-	}
 }

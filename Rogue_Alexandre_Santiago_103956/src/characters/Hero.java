@@ -135,8 +135,7 @@ public class Hero extends AliveGameElement implements Movable, Healable {
 			System.out.println("You take " + damage + " damage");
 			hpAndItemBar.setHp(getHp());
 			if (getHp() <= 0) {
-				GameEngine.getInstance().getGui().setMessage("YOU ARE DEAD!!! GAME OVER");
-				GameEngine.getInstance().getGui().dispose();
+				isDead();
 			}
 			canBlock = true;
 		}

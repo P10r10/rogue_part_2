@@ -23,8 +23,13 @@ public abstract class AliveGameElement extends GameElement {
 		return isAlive;
 	}
 
+	public void isDead() {
+		isAlive = false;
+	}
+
 	public void takesDamage(int damage) {
 		hp -= damage;
+		System.out.println(hp);
 		if (hp <= 0) {
 			isAlive = false;
 		}

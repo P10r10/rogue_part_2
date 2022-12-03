@@ -19,7 +19,7 @@ public class GameEngine implements Observer {
 	private static GameEngine INSTANCE = null;
 	private ImageMatrixGUI gui = ImageMatrixGUI.getInstance();
 
-	private Hero hero = new Hero(new Point2D(1, 1), "room0");
+	private Hero hero = new Hero(new Point2D(1, 1), "testRoom2");
 	private Map<String, Room> rooms = new HashMap<>();
 
 	private int turns;
@@ -57,8 +57,8 @@ public class GameEngine implements Observer {
 		rooms.put("room2", FileReader.createRoom("room2"));
 		rooms.put("room3", FileReader.createRoom("room3"));
 		
-		rooms.get("room0").addGameElement(hero);
-		rooms.get("room0").load();
+		rooms.get("testRoom2").addGameElement(hero);
+		rooms.get("testRoom2").load();
 		
 		gui.setStatusMessage("Good luck!");
 		gui.update();
@@ -88,10 +88,15 @@ public class GameEngine implements Observer {
 		turns++;
 		gui.setStatusMessage("Turn: " + turns + " Points: " + hero.getPoints());
 		gui.update();
-		if (hero.hasWon()) {
-			String name = gui.askUser("Congratulations! Insert your name: ");
-			Score.addScoreToFile(name, hero.getPoints());
-			gui.setMessage("     TOP 5 SCORES\n\n" + Score.getHighScores() + "\n");
+		if (hero.hasWon() || !hero.isAlive()) { //GAME OVER
+			String name = "";
+			if (hero.hasWon()) {
+				name = gui.askUser("Congratulations! Insert your name: ");
+			}
+			if (!hero.isAlive()) {
+				name = gui.askUser("GAME OVER! Insert your name: ");
+			}
+			gui.setMessage("     TOP 5 SCORES\n\n" + Score.getHighScores(name, hero.getPoints()) + "\n");
 			gui.dispose();
 		}
 	}
