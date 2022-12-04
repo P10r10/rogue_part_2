@@ -160,6 +160,9 @@ public class Hero extends AliveGameElement implements Movable, Healable {
 			elem.takesDamage(damage);
 			if (elem.getHp() <= 0) { // enemy dies
 				addPoints(((AwardsPoints) elem).points());
+				if (elem instanceof Thief) {
+					((Thief) elem).drop();
+				}
 				thisRoom.removeGameElement(elem);
 			}
 		} else if (thisRoom.elementAt(destination) instanceof Door) { // interaction with doors

@@ -34,7 +34,6 @@ public class HpAndItemBar {
 	}
 	
 	public void addItem(ImageTile item) {
-		
 			for (int i = 0; i < 3; i++) {
 				if (items.putIfAbsent(i, item) == null) {
 					((GameElement) item).setPosition(new Point2D(7 + i, 10));

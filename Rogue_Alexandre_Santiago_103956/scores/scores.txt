@@ -1,5 +1,5 @@
-AAA,25
-BBB,20
-CCC,15
-DDD,10
-EEE,5
+John,25
+Elise,20
+Mary,15
+Carl,10
+Emma,5

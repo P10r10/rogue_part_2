@@ -2,15 +2,14 @@
 #        #
 #        #
 #        #
-##      ##
+#        #
 #        #
 #        #
 #        #
 #        #
 ##########
 
-HealingPotion,3,3
-Sword,3,3
-Skeleton,5,5
-Bat,5,6
-Scorpio,5,7
+Sword,2,2
+Armor,2,3
+HealingPotion,3,2
+Thief,8,8
