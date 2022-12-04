@@ -1,7 +1,7 @@
 package items;
 
-import Interfaces.AwardsPoints;
-import Interfaces.Pickable;
+import interfaces.AwardsPoints;
+import interfaces.Pickable;
 import logic.GameElement;
 import pt.iscte.poo.utils.Point2D;
 

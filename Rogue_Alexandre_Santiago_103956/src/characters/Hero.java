@@ -2,10 +2,10 @@ package characters;
 
 import java.util.Map;
 
-import Interfaces.AwardsPoints;
-import Interfaces.Healable;
-import Interfaces.Movable;
-import Interfaces.Pickable;
+import interfaces.AwardsPoints;
+import interfaces.Healable;
+import interfaces.Movable;
+import interfaces.Pickable;
 import items.Armor;
 import items.HealingPotion;
 import items.Key;
@@ -75,7 +75,7 @@ public class Hero extends AliveGameElement implements Movable, Healable {
 				heal(); // consumes potion only with hp missing
 				isPoisoned = false;
 				addPoints(((AwardsPoints) item).points());
-				((GameElement) item).setLayer(0);
+				((HealingPotion) item).isConsumed();
 				return;
 			}
 			((GameElement) item).setPosition(getPosition());
@@ -134,7 +134,7 @@ public class Hero extends AliveGameElement implements Movable, Healable {
 			setHp(getHp() - damage);
 			System.out.println("You take " + damage + " damage");
 			hpAndItemBar.setHp(getHp());
-			if (getHp() <= 0) {
+			if (getHp() <= 0) { // Hero dies
 				isDead();
 			}
 			canBlock = true;
@@ -179,7 +179,7 @@ public class Hero extends AliveGameElement implements Movable, Healable {
 					if (item instanceof Key && ((Key) item).getId().equals(door.getKey_id())) { // key matches
 						for (int num : items.keySet()) { // takes key from inventory
 							if (items.get(num).equals(item)) {
-								((Key) item).setLayer(0);
+								((Key) item).isConsumed();
 								hpAndItemBar.removeItem(num);
 								break;
 							}

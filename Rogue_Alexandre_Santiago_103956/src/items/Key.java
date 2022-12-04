@@ -1,10 +1,11 @@
 package items;
 
-import Interfaces.Pickable;
+import interfaces.Consumable;
+import interfaces.Pickable;
 import logic.GameElement;
 import pt.iscte.poo.utils.Point2D;
 
-public class Key extends GameElement implements Pickable {
+public class Key extends GameElement implements Pickable, Consumable {
 
 	private String id;
 
@@ -27,6 +28,11 @@ public class Key extends GameElement implements Pickable {
 		}
 	}
 
+	@Override
+	public void isConsumed() {
+		setLayer(0);
+	}
+	
 	@Override
 	public String getName() {
 		return "Key";

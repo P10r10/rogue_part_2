@@ -1,11 +1,12 @@
 package items;
 
-import Interfaces.AwardsPoints;
-import Interfaces.Pickable;
+import interfaces.AwardsPoints;
+import interfaces.Consumable;
+import interfaces.Pickable;
 import logic.GameElement;
 import pt.iscte.poo.utils.Point2D;
 
-public class HealingPotion extends GameElement implements Pickable, AwardsPoints {
+public class HealingPotion extends GameElement implements Pickable, AwardsPoints, Consumable {
 	
 	public HealingPotion(Point2D position, String room) {
 		super(position, room);
@@ -24,6 +25,11 @@ public class HealingPotion extends GameElement implements Pickable, AwardsPoints
 	@Override
 	public int points() {
 		return -7; // using potion awards penalty
+	}
+	
+	@Override
+	public void isConsumed() {
+		setLayer(0);
 	}
 	
 	@Override

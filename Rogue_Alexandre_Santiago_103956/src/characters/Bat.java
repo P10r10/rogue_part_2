@@ -1,8 +1,8 @@
 package characters;
 
-import Interfaces.AwardsPoints;
-import Interfaces.Healable;
-import Interfaces.Movable;
+import interfaces.AwardsPoints;
+import interfaces.Healable;
+import interfaces.Movable;
 import logic.AliveGameElement;
 import logic.GameEngine;
 import pt.iscte.poo.utils.Direction;

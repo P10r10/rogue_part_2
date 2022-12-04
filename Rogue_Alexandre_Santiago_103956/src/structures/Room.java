@@ -2,9 +2,9 @@ package structures;
 
 import java.util.List;
 
-import Interfaces.Movable;
-import Interfaces.Pickable;
 import characters.Hero;
+import interfaces.Movable;
+import interfaces.Pickable;
 import logic.AliveGameElement;
 import logic.GameElement;
 import logic.GameEngine;

@@ -1,7 +1,7 @@
 package characters;
 
-import Interfaces.AwardsPoints;
-import Interfaces.Movable;
+import interfaces.AwardsPoints;
+import interfaces.Movable;
 import logic.AliveGameElement;
 import logic.GameEngine;
 import pt.iscte.poo.utils.Point2D;
