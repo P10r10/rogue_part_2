@@ -156,7 +156,7 @@ public class Hero extends AliveGameElement implements Movable, Healable {
 			if (hasSword) {
 				damage++;
 			}
-			System.out.println("You deal " + damage + " damage to " + elem);
+			System.out.println("You deal " + damage + " damage to the " + elem);
 			elem.takesDamage(damage);
 			if (elem.getHp() <= 0) { // enemy dies
 				addPoints(((AwardsPoints) elem).points());
