@@ -17,4 +17,4 @@ Skeleton,8,5
 Door,9,2,room3,0,2,KEY1
 Door,9,7,room3,0,7
 Door,4,0,room0,4,9,KEY0
-Door,4,0,room4,4,9
+Door,4,9,room4,4,0

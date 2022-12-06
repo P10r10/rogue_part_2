@@ -170,12 +170,12 @@ public class Hero extends AliveGameElement implements Movable, Healable {
 			if (door.isOpen()) { // door is already open
 				thisRoom.removeGameElement(this); // removes hero from current room
 				Point2D dest = new Point2D(door.getX_dest(), door.getY_dest());
-				setPosition(dest); // new position from door
+				setPosition(dest); // Hero's new position from door
 				setThisRoom(door.getDestination()); // Hero new room name
-				Room newRoom = GameEngine.getInstance().getRoom(thisRoom());
-				((Door) newRoom.elementAt(dest)).open(); // open door in new room
-				GameEngine.getInstance().getRoom(thisRoom()).addGameElement(this); // add Hero to new Room
-				GameEngine.getInstance().getRoom(door.getDestination()).load();
+				thisRoom = GameEngine.getInstance().getRoom(thisRoom());
+				((Door) thisRoom.elementAt(dest)).open(); // open door in new room
+				thisRoom.addGameElement(this); // add Hero to new Room
+				thisRoom.load();
 			} else { // door is closed
 				Map<Integer, ImageTile> items = hpAndItemBar.getItems();
 				for (ImageTile item : items.values()) {

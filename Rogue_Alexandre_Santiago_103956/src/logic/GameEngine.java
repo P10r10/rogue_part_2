@@ -15,11 +15,12 @@ public class GameEngine implements Observer {
 
 	public static final int GRID_HEIGHT = 11;
 	public static final int GRID_WIDTH = 10;
+	private final String STARTING_ROOM = "room0";
 
 	private static GameEngine INSTANCE = null;
 	private ImageMatrixGUI gui = ImageMatrixGUI.getInstance();
 
-	private Hero hero = new Hero(new Point2D(1, 1), "room0"); // Hero starting room required
+	private Hero hero = new Hero(new Point2D(1, 1), STARTING_ROOM);
 	private Map<String, Room> rooms = new HashMap<>();
 
 	private int turns;
@@ -54,11 +55,12 @@ public class GameEngine implements Observer {
 		rooms.put("room1", FileReader.createRoom("room1"));
 		rooms.put("room2", FileReader.createRoom("room2"));
 		rooms.put("room3", FileReader.createRoom("room3"));
+		rooms.put("room4", FileReader.createRoom("room4"));
 		rooms.put("testRoom", FileReader.createRoom("testRoom"));
 		rooms.put("testRoom2", FileReader.createRoom("testRoom2"));
 
-		rooms.get("room0").addGameElement(hero); // the same room must be placed in Hero initialization above
-		rooms.get("room0").load(); // the same room must be placed in Hero initialization above
+		rooms.get(STARTING_ROOM).addGameElement(hero);
+		rooms.get(STARTING_ROOM).load();
 
 		gui.setStatusMessage("Good luck!");
 		gui.update();

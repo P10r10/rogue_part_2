@@ -36,7 +36,6 @@ public class Thug extends AliveGameElement implements Movable, AwardsPoints {
 	public void move() {
 		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
 		Point2D destination = thisRoom.wayToHero(this);
-
 		if (thisRoom.elementAt(destination) instanceof Hero) { // attacks hero
 			if (new Random().nextDouble() <= 0.3) { // only damages in 30% of attacks
 				((Hero) thisRoom.elementAt(destination)).takesDamage(3);

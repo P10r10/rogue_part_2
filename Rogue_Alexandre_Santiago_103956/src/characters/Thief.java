@@ -78,7 +78,9 @@ public class Thief extends AliveGameElement implements Movable, AwardsPoints {
 		}
 
 		if (thisRoom.elementAt(destination) instanceof Hero) { // attacks hero
-			steal((Hero) thisRoom.elementAt(destination));
+			if (stolenItem == null) { // has space to steal from Hero
+				steal((Hero) thisRoom.elementAt(destination));
+			}
 		} else if (thisRoom.elementAt(destination) instanceof Wall || thisRoom.elementAt(destination) instanceof Door
 				|| thisRoom.elementAt(destination) instanceof AliveGameElement) {
 			return; // can't cross walls, doors or other creatures
