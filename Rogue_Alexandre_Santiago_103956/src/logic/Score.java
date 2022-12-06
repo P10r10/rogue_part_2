@@ -10,12 +10,12 @@ import java.util.Scanner;
 public class Score {
 	private String name;
 	private int score;
-	
+
 	public Score(String name, int score) {
 		this.name = name;
 		this.score = score;
 	}
-	
+
 	public int getScore() {
 		return score;
 	}
@@ -28,7 +28,7 @@ public class Score {
 	public String toString() {
 		return String.format("%9s: %d PTS", name, score);
 	}
-	
+
 	public static String getHighScores(String name, int points) {
 		List<Score> scores = new ArrayList<>();
 		String res = "";
@@ -39,9 +39,9 @@ public class Score {
 			}
 			scores.add(new Score(name, points));
 			scores.sort((s1, s2) -> s2.getScore() - s1.getScore());
-			scores.remove(scores.size() - 1);
+			scores.remove(scores.size() - 1); // discards lower score
 			PrintWriter pw = new PrintWriter(new File("scores\\scores.txt"));
-			for (Score score : scores) {
+			for (Score score : scores) { // saves scores to file scores.txt
 				pw.println(score.getName() + "," + score.getScore());
 				res += score + "\n";
 			}

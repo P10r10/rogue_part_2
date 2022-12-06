@@ -26,7 +26,7 @@ public class Bat extends AliveGameElement implements Movable, Healable, AwardsPo
 			setHp(getHp() + 1);
 		}
 	}
-	
+
 	@Override
 	public int points() {
 		return 11;
@@ -64,7 +64,7 @@ public class Bat extends AliveGameElement implements Movable, Healable, AwardsPo
 			setPosition(destination);
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return getName();

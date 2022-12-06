@@ -32,21 +32,21 @@ public class HpAndItemBar {
 	public List<ImageTile> getComponents() {
 		return barComponents;
 	}
-	
+
 	public void addItem(ImageTile item) {
-			for (int i = 0; i < 3; i++) {
-				if (items.putIfAbsent(i, item) == null) {
-					((GameElement) item).setPosition(new Point2D(7 + i, 10));
-					barComponents.add(item);
-					break;
-				}
+		for (int i = 0; i < 3; i++) {
+			if (items.putIfAbsent(i, item) == null) {
+				((GameElement) item).setPosition(new Point2D(7 + i, 10)); // 7 is x axis of 1st item slot
+				barComponents.add(item);
+				break;
 			}
+		}
 	}
-	
+
 	public int availableSlots() {
 		return items.size();
 	}
-	
+
 	public Map<Integer, ImageTile> getItems() {
 		return items;
 	}
@@ -55,7 +55,7 @@ public class HpAndItemBar {
 		barComponents.remove(items.get(slot));
 		return items.remove(slot);
 	}
-	
+
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
@@ -71,8 +71,8 @@ public class HpAndItemBar {
 		}
 
 		@Override
-		public String getName() {
-			if (hp >= limit) {
+		public String getName() { // three-state color depending on
+			if (hp >= limit) { // individual limit
 				return "Green";
 			}
 			if (hp == limit - 1) {

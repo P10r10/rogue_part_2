@@ -9,9 +9,9 @@
 #        #
 ##########
 
+Sword,2,1
 Sword,2,2
-Armor,2,3
-HealingPotion,3,2
-Thief,8,8
-Thief,7,7
+Sword,1,2
 Thief,8,7
+Thief,7,7
+Thief,7,8

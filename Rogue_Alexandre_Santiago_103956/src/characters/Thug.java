@@ -17,7 +17,7 @@ public class Thug extends AliveGameElement implements Movable, AwardsPoints {
 		super(position, room, 10); // initial hp = 10
 		setLayer(6);
 	}
-	
+
 	@Override
 	public int points() {
 		return 23;
@@ -48,7 +48,7 @@ public class Thug extends AliveGameElement implements Movable, AwardsPoints {
 			setPosition(destination);
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return getName();

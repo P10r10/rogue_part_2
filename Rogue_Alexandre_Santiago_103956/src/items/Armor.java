@@ -5,7 +5,7 @@ import logic.GameElement;
 import pt.iscte.poo.utils.Point2D;
 
 public class Armor extends GameElement implements Pickable {
-	
+
 	public Armor(Point2D position, String room) {
 		super(position, room);
 		setLayer(5);
@@ -19,7 +19,7 @@ public class Armor extends GameElement implements Pickable {
 			setLayer(5);
 		}
 	}
-	
+
 	@Override
 	public String getName() {
 		return "Armor";

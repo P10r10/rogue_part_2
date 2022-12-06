@@ -28,7 +28,7 @@ public class Room {
 		GameEngine.getInstance().getGui().addImages(getHero().getHpAndItemBar().getComponents());
 	}
 
-	private Hero getHero() {
+	public Hero getHero() {
 		for (ImageTile gameElement : elements) {
 			if (gameElement instanceof Hero)
 				return (Hero) gameElement;
@@ -36,22 +36,8 @@ public class Room {
 		return null;
 	}
 
-	private Point2D heroPosition() {
-		for (ImageTile gameElement : elements) {
-			if (gameElement instanceof Hero)
-				return gameElement.getPosition();
-		}
-		return null;
-	}
-
 	public Point2D wayToHero(AliveGameElement elem) {
-		Vector2D directionToHero = elem.getPosition().directionTo(heroPosition()).asVector();
-		Point2D destination = elem.getPosition().plus(directionToHero);
-		return destination;
-	}
-	
-	public Point2D awayFromHero(AliveGameElement elem) {
-		Vector2D directionToHero = elem.getPosition().directionTo(heroPosition()).opposite().asVector();
+		Vector2D directionToHero = elem.getPosition().directionTo(getHero().getPosition()).asVector();
 		Point2D destination = elem.getPosition().plus(directionToHero);
 		return destination;
 	}

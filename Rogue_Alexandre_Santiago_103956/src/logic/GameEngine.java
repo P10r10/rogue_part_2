@@ -19,7 +19,7 @@ public class GameEngine implements Observer {
 	private static GameEngine INSTANCE = null;
 	private ImageMatrixGUI gui = ImageMatrixGUI.getInstance();
 
-	private Hero hero = new Hero(new Point2D(1, 1), "room0");
+	private Hero hero = new Hero(new Point2D(1, 1), "room0"); // Hero starting room required
 	private Map<String, Room> rooms = new HashMap<>();
 
 	private int turns;
@@ -48,18 +48,18 @@ public class GameEngine implements Observer {
 		return rooms.get(room);
 	}
 
-	public void start() { // init only once
+	public void start() {
 
-		rooms.put("testRoom", FileReader.createRoom("testRoom"));//change in Hero too!
-		rooms.put("testRoom2", FileReader.createRoom("testRoom2"));//change in Hero too!
 		rooms.put("room0", FileReader.createRoom("room0"));
 		rooms.put("room1", FileReader.createRoom("room1"));
 		rooms.put("room2", FileReader.createRoom("room2"));
 		rooms.put("room3", FileReader.createRoom("room3"));
-		
-		rooms.get("room0").addGameElement(hero);
-		rooms.get("room0").load();
-		
+		rooms.put("testRoom", FileReader.createRoom("testRoom"));
+		rooms.put("testRoom2", FileReader.createRoom("testRoom2"));
+
+		rooms.get("room0").addGameElement(hero); // the same room must be placed in Hero initialization above
+		rooms.get("room0").load(); // the same room must be placed in Hero initialization above
+
 		gui.setStatusMessage("Good luck!");
 		gui.update();
 	}
@@ -88,7 +88,7 @@ public class GameEngine implements Observer {
 		turns++;
 		gui.setStatusMessage("Turn: " + turns + " Points: " + hero.getPoints());
 		gui.update();
-		if (hero.hasWon() || !hero.isAlive()) { //GAME OVER
+		if (hero.hasWon() || !hero.isAlive()) { // GAME OVER
 			String name = "";
 			if (hero.hasWon()) {
 				name = gui.askUser("Congratulations! Insert your name: ");

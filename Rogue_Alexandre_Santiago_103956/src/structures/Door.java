@@ -22,7 +22,7 @@ public class Door extends GameElement {
 		}
 		setLayer(3);
 	}
-	
+
 	public String getDestination() {
 		return destination;
 	}

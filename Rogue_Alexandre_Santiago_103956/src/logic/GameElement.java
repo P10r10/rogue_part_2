@@ -78,7 +78,7 @@ public abstract class GameElement implements ImageTile {
 		case "Door":
 			if (args.length == 7) { // has Key_ID
 				return new Door(position, room, args[3], Integer.parseInt(args[4]), Integer.parseInt(args[5]), args[6]);
-			} else { // has no Key_ID correspond to open door
+			} else { // having no Key_ID corresponds to open door
 				return new Door(position, room, args[3], Integer.parseInt(args[4]), Integer.parseInt(args[5]), null);
 			}
 		default:

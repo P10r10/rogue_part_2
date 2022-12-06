@@ -14,11 +14,11 @@ public class Key extends GameElement implements Pickable, Consumable {
 		this.id = id;
 		setLayer(5);
 	}
-	
+
 	public String getId() {
 		return id;
 	}
-	
+
 	@Override
 	public void isPicked(boolean picked) {
 		if (picked) {
@@ -32,7 +32,7 @@ public class Key extends GameElement implements Pickable, Consumable {
 	public void isConsumed() {
 		setLayer(0);
 	}
-	
+
 	@Override
 	public String getName() {
 		return "Key";

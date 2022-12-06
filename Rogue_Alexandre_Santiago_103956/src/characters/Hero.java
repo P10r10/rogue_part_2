@@ -96,10 +96,10 @@ public class Hero extends AliveGameElement implements Movable, Healable {
 		}
 	}
 
-	public boolean hasWon( ) {
+	public boolean hasWon() {
 		return hasWon;
 	}
-	
+
 	public HpAndItemBar getHpAndItemBar() {
 		return hpAndItemBar;
 	}

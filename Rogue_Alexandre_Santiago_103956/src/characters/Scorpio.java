@@ -10,17 +10,17 @@ import structures.Room;
 import structures.Wall;
 
 public class Scorpio extends AliveGameElement implements Movable, AwardsPoints {
-	
+
 	public Scorpio(Point2D position, String room) {
 		super(position, room, 2); // initial hp = 2
 		setLayer(6);
 	}
-	
+
 	@Override
 	public int points() {
 		return 17;
 	}
-	
+
 	@Override
 	public String getName() {
 		if (getHp() <= 0) {
@@ -34,7 +34,7 @@ public class Scorpio extends AliveGameElement implements Movable, AwardsPoints {
 	public void move() {
 		Room thisRoom = GameEngine.getInstance().getRoom(thisRoom());
 		Point2D destination = thisRoom.wayToHero(this);
-		
+
 		if (thisRoom.elementAt(destination) instanceof Hero) { // attacks hero
 			((Hero) thisRoom.elementAt(destination)).setPoisoned();
 			System.out.println("You are poisoned...");
@@ -43,9 +43,9 @@ public class Scorpio extends AliveGameElement implements Movable, AwardsPoints {
 			return; // can't cross walls, doors or other creatures
 		} else { // can move freely
 			setPosition(destination);
-		}	
+		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return getName();

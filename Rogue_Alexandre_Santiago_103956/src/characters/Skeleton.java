@@ -20,7 +20,7 @@ public class Skeleton extends AliveGameElement implements Movable, AwardsPoints 
 	public int points() {
 		return 19;
 	}
-	
+
 	@Override
 	public String getName() {
 		if (getHp() <= 0) {
@@ -48,7 +48,7 @@ public class Skeleton extends AliveGameElement implements Movable, AwardsPoints 
 			setPosition(destination);
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return getName();
